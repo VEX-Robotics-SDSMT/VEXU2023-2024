@@ -8,7 +8,7 @@
 #define VISION_SENSOR 3
 
 #define L_FRONT 11
-#define L_REAR 10
+#define L_REAR 9
 #define L_MID 2
 #define R_FRONT 12
 #define R_REAR 6

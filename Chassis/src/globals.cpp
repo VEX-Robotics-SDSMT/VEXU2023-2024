@@ -6,13 +6,15 @@ pros::Controller MasterController (pros::E_CONTROLLER_MASTER);
 pros::Imu intertialSensor(INERTIAL_SENSOR);
 pros::Vision vision(VISION_SENSOR);
 
-pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor leftRear(L_REAR, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor rightFront(R_FRONT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor rightRear(R_REAR, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor rightMid(R_MID, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor leftMid(L_MID, pros::E_MOTOR_GEARSET_18, false);
 
-std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear};
-std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear};
+std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear, leftMid};
+std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear, rightMid};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 
