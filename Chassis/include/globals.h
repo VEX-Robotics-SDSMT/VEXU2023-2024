@@ -6,6 +6,7 @@
 
 #define INERTIAL_SENSOR 20
 #define VISION_SENSOR 3
+#define VEX_GPS 13
 
 #define L_FRONT 11
 #define L_REAR 9
@@ -22,6 +23,7 @@ extern pros::Controller MasterController;
 
 extern pros::Imu intertialSensor;
 extern pros::Vision vision;
+extern pros::GPS gps
 
 extern pros::Motor leftFront;
 extern pros::Motor leftRear;

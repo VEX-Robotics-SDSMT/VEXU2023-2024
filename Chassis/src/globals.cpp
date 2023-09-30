@@ -5,6 +5,7 @@ pros::Controller MasterController (pros::E_CONTROLLER_MASTER);
 
 pros::Imu intertialSensor(INERTIAL_SENSOR);
 pros::Vision vision(VISION_SENSOR);
+pros::GPS gps(VEX_GPS);
 
 pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor leftRear(L_REAR, pros::E_MOTOR_GEARSET_18, true);
