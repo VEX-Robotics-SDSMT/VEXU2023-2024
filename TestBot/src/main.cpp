@@ -106,6 +106,7 @@ void opcontrol()
 
 		//motor.move(const int voltage)
 		//motor.moveVelocity(const int velocity)
+		
 		//*********************************************
 	}
 }

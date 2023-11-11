@@ -43,6 +43,7 @@
 #include "botFunctions.h"
 #include "Logger.h"
 #include "AimAssist.h"
+#include "vexGPS.h"
 
 /**
  * You should add more #includes here

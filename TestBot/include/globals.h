@@ -23,7 +23,7 @@ extern pros::Controller MasterController;
 
 extern pros::Imu intertialSensor;
 extern pros::Vision vision;
-extern pros::GPS gps
+extern pros::GPS gps;
 
 extern pros::Motor leftFront;
 extern pros::Motor leftRear;

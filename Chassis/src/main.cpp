@@ -127,6 +127,12 @@ void opcontrol()
 		{
 			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 		}
+
+		//GPS testing
+		double head = gps.get_heading();
+		MasterController.print(0, 0, "%f", head);
+		MasterController.clear_line(0);
+
 		//*********************************************
 	}
 }

@@ -8,8 +8,7 @@
 #include "math.h"
 #include "Logger.h"
 #include "DiffDrive.h"
-
-namespace Mines
+#endif
 
 /*put class functions and others here
 it will be necessary to incorporate functions
