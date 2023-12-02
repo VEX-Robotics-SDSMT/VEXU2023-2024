@@ -75,7 +75,19 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	
+	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
+	drive.setDrivePIDVals(1, 1, 1);
+	drive.setDrivePIDTol(50);
+	drive.setTurnPIDVals(1.0, 0, 0);
+	drive.setTurnPIDTol(2);
+	drive.setMaxDriveSpeed(0.5); 
+	drive.setMaxTurnSpeed(0.5);
+
+	drive.setMaxDriveAccel(0.12);
+
+	ScreenLogger logger(LoggerSettings::verbose);
+
 }
 
 /**
@@ -97,16 +109,53 @@ void opcontrol()
 	while(true)
 	{	
 		// ********************DRIVE********************
-		// *********************************************
+		// 2 stick arcade
+		double leftAxisY = MasterController.get_analog(axisLeftY);
+		double rightAxisX = MasterController.get_analog(axisRightX);
+		double leftVelocity = ((leftAxisY + rightAxisX));
+		double rightVelocity = ((leftAxisY - rightAxisX));
 
-		// can start here to program basic driving code
+		// 1 stick arcade
+		//double leftAxisY = MasterController.get_analog(axisLeftY);
+		//double leftAxisX = MasterController.get_analog(axisLeftX);
+		//double rightAxisX = MasterController.get_analog(axisRightX);
+		//double aimVelocityLeft = (rightAxisX) * 0.06;
+		//double aimVelocityRight = -rightAxisX * 0.06;
+		//double leftVelocity = ((leftAxisY + leftAxisX + aimVelocityLeft));
+		//double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
 
-		// names of each motor
-		// leftFront, leftRear, rightFront, rightRear
+		// Tank
+		// double leftAxisY = MasterController.get_analog(axisLeftY);
+	    // double rightAxisY = MasterController.get_analog(axisRightY);
+		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
+		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
 
-		//motor.move(const int voltage)
-		//motor.moveVelocity(const int velocity)
-		
+		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		{
+			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
+		}
+		else
+		{
+			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
+		}
+
+		//CATAPULT
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+		{
+			cataMotors.move(127);
+		}
+		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			cataMotors.move(-50);
+		}
+
+		//WINGS
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_X))
+			wings.set_value(true);
+		else
+			wings.set_value(false);
+
 		//*********************************************
 	}
 }

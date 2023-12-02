@@ -8,17 +8,26 @@ pros::Vision vision(VISION_SENSOR);
 pros::ADIEncoder driveEncoder(ENCODER_TOP, ENCODER_BOTTOM, false);
 pros::GPS gps(VEX_GPS);
 
-pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor leftRear(L_REAR, pros::E_MOTOR_GEARSET_18, true);
-pros::Motor rightFront(R_FRONT, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor rightFront(R_FRONT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor rightRear(R_REAR, pros::E_MOTOR_GEARSET_18, false);
-pros::Motor rightMid(R_MID, pros::E_MOTOR_GEARSET_18, true);
-pros::Motor leftMid(L_MID, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor rightFMid(R_FRONTM, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor leftFMid(L_FRONTM, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor rightRMid(R_REARM, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor leftRMid(L_REARM, pros::E_MOTOR_GEARSET_18, true);
 
-std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear, leftMid};
-std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear, rightMid};
+pros::Motor cataRight(CATA_R, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor cataLeft(CATA_L, pros::E_MOTOR_GEARSET_18, false);
+
+std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear, leftFMid, leftRMid};
+std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear, rightFMid, rightRMid};
+std::vector<pros::Motor> catapultVector = {cataRight, cataLeft};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
+Mines::MinesMotorGroup cataMotors(catapultVector);
+
+pros::ADIDigitalOut wings(WING);
 
 double axisPercentBlue = 600.0 / 127;
 double axisPercentGreen = 200.0 / 127;
