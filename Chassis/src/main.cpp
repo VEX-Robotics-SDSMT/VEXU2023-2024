@@ -75,7 +75,20 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	
+	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
+	drive.setDrivePIDVals(1, 1, 1);
+	drive.setDrivePIDTol(50);
+	drive.setTurnPIDVals(1.0, 0, 0);
+	drive.setTurnPIDTol(2);
+	drive.setMaxDriveSpeed(0.5); 
+	drive.setMaxTurnSpeed(0.5);
+
+	drive.setMaxDriveAccel(0.12);
+
+	ScreenLogger logger(LoggerSettings::verbose);
+
+	drive.driveTiles(100);
 }
 
 /**
@@ -127,6 +140,12 @@ void opcontrol()
 		{
 			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 		}
+
+		//GPS testing
+		double head = gps.get_heading();
+		MasterController.print(0, 0, "%f", head);
+		MasterController.clear_line(0);
+
 		//*********************************************
 	}
 }
