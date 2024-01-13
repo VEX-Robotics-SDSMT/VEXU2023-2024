@@ -9,10 +9,10 @@ pros::GPS gps(VEX_GPS);
 
 pros::Motor leftFront(L_FRONT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor leftRear(L_REAR, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor leftMid(L_MID, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor rightFront(R_FRONT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor rightRear(R_REAR, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor rightMid(R_MID, pros::E_MOTOR_GEARSET_18, true);
-pros::Motor leftMid(L_MID, pros::E_MOTOR_GEARSET_18, false);
 
 std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear, leftMid};
 std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear, rightMid};
@@ -25,6 +25,7 @@ double axisPercentRed = 100.0 / 127;
 int blueGearbox = 600;
 int greenGearbox = 200;
 int redGearbox = 100;
+
 
 uint8_t RED_GOAL_SIG_ID = 1;
 uint8_t BLUE_GOAL_SIG_ID = 2;

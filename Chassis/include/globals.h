@@ -23,7 +23,7 @@ extern pros::Controller MasterController;
 
 extern pros::Imu intertialSensor;
 extern pros::Vision vision;
-extern pros::GPS gps
+extern pros::GPS gps;
 
 extern pros::Motor leftFront;
 extern pros::Motor leftRear;
@@ -34,7 +34,6 @@ extern std::vector<pros::Motor> leftDriveVector;
 extern std::vector<pros::Motor> rightDriveVector;
 extern Mines::MinesMotorGroup leftDriveMotors;
 extern Mines::MinesMotorGroup rightDriveMotors;
-
 
 enum Color { red, blue, purple };
 extern pros::Motor string;
