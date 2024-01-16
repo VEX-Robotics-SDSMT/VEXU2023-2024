@@ -76,7 +76,7 @@ void competition_initialize()
 void autonomous() 
 {
 	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
-	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
 	drive.setDrivePIDVals(1, 1, 1);
 	drive.setDrivePIDTol(50);
 	drive.setTurnPIDVals(1.0, 0, 0);
