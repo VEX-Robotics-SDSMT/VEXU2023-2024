@@ -10,7 +10,8 @@
 
 namespace Mines
 {
-    class PIDInterface
+    class 
+    PIDInterface
     {
         public:
             virtual double getPositionPID() = 0;

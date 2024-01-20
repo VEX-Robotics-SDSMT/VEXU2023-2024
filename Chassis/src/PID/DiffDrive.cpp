@@ -12,8 +12,6 @@ DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, pros::IMU imu)
 {
     MAX_SPEED = rightMotors.getMaxVelocity();
 
-    logger.Log("status: constructor called", 10, LoggerSettings::verbose);
-
     DriveSensorInterface driveSensors(left, right);
     driveSensorInterface = &driveSensors;
     driveSensorInterface->Reset();
@@ -54,7 +52,7 @@ double DiffDrive::getTurnVelocity()
 
 void DiffDrive::driveTiles(double target, bool waitForCompletion)
 {
-    driveSensorInterface->Reset();
+    //driveSensorInterface->Reset();
 
     drivePID.SetTarget(target);
     if(waitForCompletion)
@@ -68,7 +66,7 @@ void DiffDrive::driveTiles(double target, bool waitForCompletion)
 
 void DiffDrive::driveTiles(double target, int timeOut)
 {
-    driveSensorInterface->Reset();
+    //driveSensorInterface->Reset();
     drivePID.SetTarget(target);
 
     while(drivePID.GetTimeSinceTargetReached() < GOAL_TIME && drivePID.GetTimeSinceTargetSet() < timeOut)

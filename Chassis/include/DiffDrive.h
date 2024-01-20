@@ -47,6 +47,7 @@ class DiffDrive
             double getPositionPID() override;
             void setVelocityPID(double value) override;
     };
+
     class TurnInterface : public PIDInterface
     {
         DiffDrive* parent;
@@ -57,6 +58,7 @@ class DiffDrive
             double getPositionPID() override;
             void setVelocityPID(double value) override;
     };
+    
     class DriveSensorInterface : public SensorInterface
     {
         Mines::MinesMotorGroup left;

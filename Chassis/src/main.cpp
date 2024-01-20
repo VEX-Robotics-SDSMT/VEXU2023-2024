@@ -61,7 +61,6 @@ void competition_initialize()
 {
 	//Skills?
 }
-
 /**
  * Runs the user autonomous code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -77,18 +76,19 @@ void autonomous()
 {
 	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
-	drive.setDrivePIDVals(1, 1, 1);
+	drive.setDrivePIDVals(1, 0, 0);
 	drive.setDrivePIDTol(50);
 	drive.setTurnPIDVals(1.0, 0, 0);
-	drive.setTurnPIDTol(2);
-	drive.setMaxDriveSpeed(0.5); 
-	drive.setMaxTurnSpeed(0.5);
+	drive.setTurnPIDTol(0.5);
+	drive.setMaxDriveSpeed(50); 
+	drive.setMaxTurnSpeed(50);
 
-	drive.setMaxDriveAccel(0.12);
+	drive.setMaxDriveAccel(50);
 
 	ScreenLogger logger(LoggerSettings::verbose);
 
-	drive.driveTiles(100);
+	MasterController.print(0, 0, "%s", "made it to driveTiles call");
+	drive.driveTiles(500);
 }
 
 /**
