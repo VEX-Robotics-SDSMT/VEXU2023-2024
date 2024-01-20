@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Chassis",
+    "project_name": "Clyde",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -308,8 +308,8 @@
     },
     "upload_options": {
       "icon": "clawbot",
-      "slot": 1,
-      "description": "Chassis"
+      "slot": 2,
+      "description": "Clyde"
     }
   }
 }

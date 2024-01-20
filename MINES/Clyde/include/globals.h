@@ -18,6 +18,7 @@
 #define R4 16
 #define LCat 10
 #define RCat 9
+#define WING 1
 
 #define CATAPULT_MOTOR_GEARSET redGearbox
 #define DRIVE_MOTOR_GEARSET blueGearbox
@@ -36,10 +37,14 @@ extern pros::Motor right2;
 extern pros::Motor right3;
 extern pros::Motor right4;
 
+extern pros::ADIDigitalOut wings;
+
 extern std::vector<pros::Motor> leftDriveVector;
 extern std::vector<pros::Motor> rightDriveVector;
+extern std::vector<pros::Motor> catapultVector;
 extern Mines::MinesMotorGroup leftDriveMotors;
 extern Mines::MinesMotorGroup rightDriveMotors;
+extern Mines::MinesMotorGroup cataMotors;
 
 extern double axisPercentBlue;
 extern double axisPercentGreen;
