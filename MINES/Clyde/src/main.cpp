@@ -130,9 +130,9 @@ void opcontrol()
 		//*********************************************
 
 		//*******************CATAPULT******************
+		//Sam will install limit switch to bring down a bit, stop to load, and then fire
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
 		{
-			//launch the catapult
 			catLaunch(cataMotors, 127);
 		}
 		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
@@ -144,13 +144,11 @@ void opcontrol()
 			cataMotors.brake();
 		}
 
+		//*******************WINGS**********************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
-		{
 			wings.set_value(1);
-		}
 		else
-		{
 			wings.set_value(0);
-		}
+		
 	}
 }

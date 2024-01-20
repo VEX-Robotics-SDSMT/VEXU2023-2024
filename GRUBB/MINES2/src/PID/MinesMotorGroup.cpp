@@ -52,6 +52,16 @@ int MinesMotorGroup::moveVelocity(const int velocity)
     return 0;
 }
 
+int MinesMotorGroup::moveVoltage(const int voltage)
+{
+    for(int i = 0; i < motorVector.size(); i++)
+    {
+        motorVector[i].move_voltage(voltage);
+    }
+    return 0;
+}
+
+
 int MinesMotorGroup::brake()
 {
     for(int i = 0; i < motorVector.size(); i++)

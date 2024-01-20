@@ -7,14 +7,14 @@ pros::Imu intertialSensor(INERTIAL_SENSOR);
 pros::Vision vision(VISION_SENSOR);
 pros::GPS gps(VEX_GPS);
 
-pros::Motor left1(L1, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor left2(L2, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor left3(L3, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor left4(L4, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor right1(R1, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor right2(R2, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor right3(R3, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor right4(R4, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor left1(L1, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor left2(L2, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor left3(L3, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor left4(L4, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor right1(R1, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor right2(R2, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor right3(R3, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor right4(R4, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor cataRight(RCat, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor cataLeft(LCat, pros::E_MOTOR_GEARSET_18, false);
 
@@ -27,6 +27,7 @@ Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 Mines::MinesMotorGroup cataMotors(catapultVector);
 
 pros::ADIDigitalOut wings(WING);
+pros::ADIDigitalOut limitSwitch(LIMIT_SWITCH);
 
 
 double axisPercentBlue = 600.0 / 127;

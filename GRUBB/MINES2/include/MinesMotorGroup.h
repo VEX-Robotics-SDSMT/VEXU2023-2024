@@ -24,6 +24,7 @@ class MinesMotorGroup
 
         int move(const int voltage);
         int moveVelocity(const int velocity);
+        int moveVoltage(const int voltage);
         int brake();
         int tarePosition();
         int setBrakeMode(pros::motor_brake_mode_e mode);

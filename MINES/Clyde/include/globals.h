@@ -19,6 +19,7 @@
 #define LCat 10
 #define RCat 9
 #define WING 1
+#define LIMIT_SWITCH 2 //port for limitSwitch once added
 
 #define CATAPULT_MOTOR_GEARSET redGearbox
 #define DRIVE_MOTOR_GEARSET blueGearbox
@@ -38,6 +39,7 @@ extern pros::Motor right3;
 extern pros::Motor right4;
 
 extern pros::ADIDigitalOut wings;
+extern pros::ADIDigitalOut limitSwitch;
 
 extern std::vector<pros::Motor> leftDriveVector;
 extern std::vector<pros::Motor> rightDriveVector;

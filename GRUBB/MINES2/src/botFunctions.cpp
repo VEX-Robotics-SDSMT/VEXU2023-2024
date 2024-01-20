@@ -34,3 +34,10 @@ void driveLoop(Mines::MinesMotorGroup leftMotorGroup, Mines::MinesMotorGroup rig
     rightMotorGroup.move(rightVelocity);
 }
 
+void catLaunch(Mines::MinesMotorGroup cataMotors, double velocity)
+{
+    cataMotors.move(velocity);
+    pros::delay(250);
+    cataMotors.brake();
+}
+

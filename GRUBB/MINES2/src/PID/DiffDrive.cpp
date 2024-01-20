@@ -20,7 +20,7 @@ DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, pros::IMU imu)
     StartPIDs();
 }
 
-DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, SensorInterface *driveSensors, pros::Imu imu):
+DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, SensorInterface *driveSensors, pros::Imu imu) :
     leftMotors(left), rightMotors(right), inertial(imu),
     driveInterface(this), turnInterface(this),
     drivePID(&driveInterface, LoggerSettings::none), turnPID(&turnInterface, LoggerSettings::none),
@@ -40,6 +40,8 @@ DiffDrive::~DiffDrive()
     killPIDs();
 }
 
+// *****************************************
+// Look at this
 double DiffDrive::getDriveVelocity()
 {
     return (leftMotors.getActualVelocity() + rightMotors.getActualVelocity()) / 2;
@@ -212,10 +214,17 @@ void DiffDrive::setMotorVelocities()
 
     double scaleFactor = min(MAX_SPEED / max(fabs(targetLeftSpeed), fabs(targetRightSpeed)), 1.0);
 
+    // Version one of velocity->voltage calculation. People on forums posted data showing a NEARLY linear relationship,
+    // so I'm trying it linear for now, and more work can be done later if this yields unacceptable results.
+    int targetLeftVoltage = ((targetLeftSpeed * scaleFactor) * 12000) / 127;
+    int targetRightVoltage = ((targetRightSpeed * scaleFactor) * 12000) / 127;
+
     if (ACTIVE)
     {
-        leftMotors.moveVelocity(targetLeftSpeed * scaleFactor);
-        rightMotors.moveVelocity(targetRightSpeed* scaleFactor);
+        // leftMotors.moveVelocity(targetLeftSpeed * scaleFactor);
+        // rightMotors.moveVelocity(targetRightSpeed * scaleFactor);
+        leftMotors.moveVoltage(targetLeftVoltage);
+        rightMotors.moveVoltage(targetRightVoltage);
     }
 }
 
