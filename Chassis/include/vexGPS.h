@@ -3,15 +3,17 @@
 
 #include "pros/gps.hpp"
 #include "TaskBase.h"
-#include <queue>
-#include <vector>
-#include "math.h"
+#include "main.h"
+#include "globals.h"
 #include "Logger.h"
 #include "DiffDrive.h"
-#endif
+#include "MinesMotorGroup.h"
 
-/*put class functions and others here
+/*put functions and others here
 it will be necessary to incorporate functions
 to work with driving and the GPS sensor*/
 
-//need to integrate turning and driving with PID
+void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps);
+
+#endif
+

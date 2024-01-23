@@ -75,6 +75,7 @@ void competition_initialize()
 void autonomous() 
 {
 	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	/* PID Testing ******************************
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
 	drive.setDrivePIDVals(1, 0, 0);
 	drive.setDrivePIDTol(50);
@@ -89,6 +90,11 @@ void autonomous()
 
 	MasterController.print(0, 0, "%s", "made it to driveTiles call");
 	drive.driveTiles(500);
+	********************************************************/
+	pros::delay(2000);
+	gpsdrive(1, -1, 1, 50, leftDriveMotors, rightDriveMotors, gps);
+	MasterController.print(0, 0, "%s", "exit gps drive");
+
 }
 
 /**
@@ -143,7 +149,12 @@ void opcontrol()
 
 		//GPS testing
 		double head = gps.get_heading();
-		MasterController.print(0, 0, "%f", head);
+		pros::c::gps_status_s_t test = gps.get_status();
+		double x = test.x;
+		double y = test.y;
+		//MasterController.print(0, 0, "%f", head);
+		MasterController.print(0, 0, "%f", x);
+		MasterController.print(0, 10, "%f", y);
 		MasterController.clear_line(0);
 
 		//*********************************************
