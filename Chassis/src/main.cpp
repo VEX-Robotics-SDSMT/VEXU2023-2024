@@ -91,9 +91,12 @@ void autonomous()
 	MasterController.print(0, 0, "%s", "made it to driveTiles call");
 	drive.driveTiles(500);
 	********************************************************/
-	pros::delay(2000);
-	gpsdrive(1, -1, 1, 50, leftDriveMotors, rightDriveMotors, gps);
-	MasterController.print(0, 0, "%s", "exit gps drive");
+	pros::delay(1000);
+	//distance, xdir, ydir, speed
+	//gpsdrive(0.3, -1, 1, 30, leftDriveMotors, rightDriveMotors, gps);
+	gpsturn(120, 30, leftDriveMotors, rightDriveMotors, gps);
+	MasterController.clear_line(0);
+	MasterController.print(0, 0, "%s", "exit gps turn");
 
 }
 
@@ -137,15 +140,8 @@ void opcontrol()
 		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
 		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
 
-		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
-		}
-		else
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
-		}
+		
+		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
 		//GPS testing
 		double head = gps.get_heading();
@@ -153,8 +149,8 @@ void opcontrol()
 		double x = test.x;
 		double y = test.y;
 		//MasterController.print(0, 0, "%f", head);
-		MasterController.print(0, 0, "%f", x);
-		MasterController.print(0, 10, "%f", y);
+		MasterController.print(0, 0, "%f", head);
+		//MasterController.print(0, 10, "%f", y);
 		MasterController.clear_line(0);
 
 		//*********************************************

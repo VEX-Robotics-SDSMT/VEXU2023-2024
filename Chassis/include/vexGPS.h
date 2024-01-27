@@ -14,6 +14,7 @@ it will be necessary to incorporate functions
 to work with driving and the GPS sensor*/
 
 void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps);
+void gpsturn(double tgt, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps);
 
 #endif
 

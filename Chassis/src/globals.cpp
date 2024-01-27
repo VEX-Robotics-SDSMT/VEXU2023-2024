@@ -15,8 +15,8 @@ pros::Motor rightFront(R_FRONT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor rightRear(R_REAR, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor rightMid(R_MID, pros::E_MOTOR_GEARSET_18, true);
 
-std::vector<pros::Motor> leftDriveVector = {leftFront, leftRear, leftMid};
-std::vector<pros::Motor> rightDriveVector = {rightFront, rightRear, rightMid};
+std::vector<pros::Motor> leftDriveVector = {leftFront, leftMid, leftRear};
+std::vector<pros::Motor> rightDriveVector = {rightFront, rightMid, rightRear};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 
