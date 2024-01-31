@@ -52,7 +52,7 @@ double DiffDrive::getTurnVelocity()
 
 void DiffDrive::driveTiles(double target, bool waitForCompletion)
 {
-    //driveSensorInterface->Reset();
+    driveSensorInterface->Reset();
 
     drivePID.SetTarget(target);
     if(waitForCompletion)
@@ -66,7 +66,7 @@ void DiffDrive::driveTiles(double target, bool waitForCompletion)
 
 void DiffDrive::driveTiles(double target, int timeOut)
 {
-    //driveSensorInterface->Reset();
+    driveSensorInterface->Reset();
     drivePID.SetTarget(target);
 
     while(drivePID.GetTimeSinceTargetReached() < GOAL_TIME && drivePID.GetTimeSinceTargetSet() < timeOut)
