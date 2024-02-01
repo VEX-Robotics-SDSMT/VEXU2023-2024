@@ -7,15 +7,13 @@
 #define INERTIAL_SENSOR 20
 #define VISION_SENSOR 3
 #define VEX_GPS 13
-#define ENCODER_TOP 11
-#define ENCODER_BOTTOM 12
+#define ENCODER_TOP 2
+#define ENCODER_BOTTOM 3
 
 #define L_FRONT 11
-#define L_REAR 9
-#define L_MID 2
+#define L_REAR 10
 #define R_FRONT 12
 #define R_REAR 6
-#define R_MID 5
 
 #define INTAKE_MOTOR_GEARSET redGearbox
 #define FLYWHEELS_MOTOR_GEARSET blueGearbox
