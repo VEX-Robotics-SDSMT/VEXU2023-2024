@@ -75,7 +75,23 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	
+	EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
+	drive.setDrivePIDVals(0.75, 0, 0);//0.2
+	drive.setDrivePIDTol(50);
+	drive.setTurnPIDVals(2, 0, 0);//1.2
+	drive.setTurnPIDTol(2);
+	drive.setMaxDriveSpeed(1); 
+	drive.setMaxTurnSpeed(1);
+
+	drive.setMaxDriveAccel(0.12);
+
+	drive.driveTiles(500);
+	drive.turnDegreesAbsolute(180);
+	drive.driveTiles(500);
+	drive.turnDegreesAbsolute(0);
+
+	drive.killPIDs();
 }
 
 /**
@@ -133,16 +149,19 @@ void opcontrol()
 		//Sam will install limit switch to bring down a bit, stop to load, and then fire
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
 		{
-			catLaunch(cataMotors, 127);
+			if(limitSwitch.get_value() == true)
+				catLaunch(cataMotors, -127);
+			else
+				catPrime(cataMotors, limitSwitch, -80);
 		}
-		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-		{
-			catLaunch(cataMotors, -127);
-		}
-		else
-		{
-			cataMotors.brake();
-		}
+		// else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		// {
+		// 	catLaunch(cataMotors, -127);
+		// }
+		// else
+		// {
+		// 	cataMotors.brake();
+		// }
 
 		//*******************WINGS**********************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
