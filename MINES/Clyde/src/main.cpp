@@ -154,14 +154,14 @@ void opcontrol()
 			else
 				catPrime(cataMotors, limitSwitch, -80);
 		}
-		// else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-		// {
-		// 	catLaunch(cataMotors, -127);
-		// }
-		// else
-		// {
-		// 	cataMotors.brake();
-		// }
+		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			cataMotors.moveVelocity(127);
+		}
+		else
+		{
+			cataMotors.brake();
+		}
 
 		//*******************WINGS**********************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
