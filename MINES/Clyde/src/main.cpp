@@ -75,7 +75,45 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	
+	EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
+	drive.setDrivePIDVals(0.75, 0, 0);//0.2
+	drive.setDrivePIDTol(50);
+	drive.setTurnPIDVals(2, 0, 0);//1.2
+	drive.setTurnPIDTol(2);
+	drive.setMaxDriveSpeed(1); 
+	drive.setMaxTurnSpeed(1);
+
+	drive.setMaxDriveAccel(0.12);
+
+	drive.driveTiles(1750);
+	drive.turnDegreesAbsolute(90);
+	//drive.setMaxDriveAccel(1);
+	drive.setActive(false);
+	leftDriveMotors.moveVelocity(12700);
+	rightDriveMotors.moveVelocity(12700);
+	pros::delay(700);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+	drive.setActive(true);
+	//drive.driveTiles(1400, 2000);
+	//drive.setMaxDriveAccel(0.12);
+	drive.driveTiles(-100);
+	drive.turnDegreesAbsolute(45);
+	drive.driveTiles(-2200);
+	for(int i = 0; i < 12; i++)
+	{
+		catPrime(cataMotors, limitSwitch, -100);
+		pros::delay(500);
+		catLaunch(cataMotors, -127);
+	}
+
+	drive.driveTiles(900);
+	drive.turnDegreesAbsolute(90);
+	drive.driveTiles(1500);
+	drive.turnDegreesAbsolute(100);
+
+	drive.killPIDs();
 }
 
 /**
@@ -98,19 +136,19 @@ void opcontrol()
 	{	
 		// ********************DRIVE********************
 		// 2 stick arcade
-		double leftAxisY = MasterController.get_analog(axisLeftY);
-		double rightAxisX = MasterController.get_analog(axisRightX);
-		double leftVelocity = ((leftAxisY + rightAxisX));
-		double rightVelocity = ((leftAxisY - rightAxisX));
+		//double leftAxisY = MasterController.get_analog(axisLeftY);
+		//double rightAxisX = MasterController.get_analog(axisRightX);
+		//double leftVelocity = ((leftAxisY + rightAxisX));
+		//double rightVelocity = ((leftAxisY - rightAxisX));
 
 		// 1 stick arcade
-		//double leftAxisY = MasterController.get_analog(axisLeftY);
-		//double leftAxisX = MasterController.get_analog(axisLeftX);
-		//double rightAxisX = MasterController.get_analog(axisRightX);
-		//double aimVelocityLeft = (rightAxisX) * 0.06;
-		//double aimVelocityRight = -rightAxisX * 0.06;
-		//double leftVelocity = ((leftAxisY + leftAxisX + aimVelocityLeft));
-		//double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
+		double leftAxisY = MasterController.get_analog(axisLeftY);
+		double leftAxisX = MasterController.get_analog(axisLeftX);
+		double rightAxisX = MasterController.get_analog(axisRightX);
+		double aimVelocityLeft = (rightAxisX) * 0.06;
+		double aimVelocityRight = -rightAxisX * 0.06;
+		double leftVelocity = ((leftAxisY + leftAxisX + aimVelocityLeft));
+		double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
 
 		// Tank
 		// double leftAxisY = MasterController.get_analog(axisLeftY);
@@ -131,13 +169,16 @@ void opcontrol()
 
 		//*******************CATAPULT******************
 		//Sam will install limit switch to bring down a bit, stop to load, and then fire
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-			catLaunch(cataMotors, 127);
+			if(limitSwitch.get_value() == true)
+				catLaunch(cataMotors, -127);
+			else
+				catPrime(cataMotors, limitSwitch, -80);
 		}
-		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
-			catLaunch(cataMotors, -127);
+			cataMotors.moveVelocity(127);
 		}
 		else
 		{
@@ -145,7 +186,7 @@ void opcontrol()
 		}
 
 		//*******************WINGS**********************
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 			wings.set_value(1);
 		else
 			wings.set_value(0);

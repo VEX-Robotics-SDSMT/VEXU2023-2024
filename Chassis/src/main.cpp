@@ -74,26 +74,25 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	//EncoderWheelSensorInterface encoderInterface(driveEncoder);
-	/* PID Testing ******************************
-	DiffDrive drive(leftDriveMotors, rightDriveMotors, intertialSensor);
-	drive.setDrivePIDVals(1, 0, 0);
+	EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
+	drive.setDrivePIDVals(0.2, 0, 0);
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(1.0, 0, 0);
-	drive.setTurnPIDTol(0.5);
-	drive.setMaxDriveSpeed(50); 
-	drive.setMaxTurnSpeed(50);
+	drive.setTurnPIDVals(1.2, 0, 0);
+	drive.setTurnPIDTol(2);
+	drive.setMaxDriveSpeed(1); 
+	drive.setMaxTurnSpeed(0.1);
 
-	drive.setMaxDriveAccel(50);
+	drive.setMaxDriveAccel(0.12);
 
-	ScreenLogger logger(LoggerSettings::verbose);
+	drive.turnDegreesAbsolute(5);
 
-	MasterController.print(0, 0, "%s", "made it to driveTiles call");
-	drive.driveTiles(500);
-	********************************************************/
-	pros::delay(2000);
-	gpsdrive(1, -1, 1, 50, leftDriveMotors, rightDriveMotors, gps);
-	MasterController.print(0, 0, "%s", "exit gps drive");
+	// pros::delay(1000);
+	// //distance, xdir, ydir, speed
+	// //gpsdrive(0.3, -1, 1, 30, leftDriveMotors, rightDriveMotors, gps);
+	// //gpsturn(120, 30, leftDriveMotors, rightDriveMotors, gps);
+	// MasterController.clear_line(0);
+	// MasterController.print(0, 0, "%s", "exit gps turn");
 
 }
 
@@ -137,15 +136,8 @@ void opcontrol()
 		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
 		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
 
-		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
-		}
-		else
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
-		}
+		
+		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
 		//GPS testing
 		double head = gps.get_heading();
@@ -153,8 +145,8 @@ void opcontrol()
 		double x = test.x;
 		double y = test.y;
 		//MasterController.print(0, 0, "%f", head);
-		MasterController.print(0, 0, "%f", x);
-		MasterController.print(0, 10, "%f", y);
+		MasterController.print(0, 0, "%f", head);
+		//MasterController.print(0, 10, "%f", y);
 		MasterController.clear_line(0);
 
 		//*********************************************
