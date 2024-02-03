@@ -74,25 +74,25 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	EncoderWheelSensorInterface encoderInterface(driveEncoder);
-	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(0.2, 0, 0);
-	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(1.2, 0, 0);
-	drive.setTurnPIDTol(2);
-	drive.setMaxDriveSpeed(1); 
-	drive.setMaxTurnSpeed(0.1);
+	// EncoderWheelSensorInterface encoderInterface(driveEncoder);
+	// DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
+	// drive.setDrivePIDVals(0.2, 0, 0);
+	// drive.setDrivePIDTol(50);
+	// drive.setTurnPIDVals(1.2, 0, 0);
+	// drive.setTurnPIDTol(2);
+	// drive.setMaxDriveSpeed(1); 
+	// drive.setMaxTurnSpeed(0.1);
 
-	drive.setMaxDriveAccel(0.12);
+	// drive.setMaxDriveAccel(0.12);
 
-	drive.turnDegreesAbsolute(5);
+	// drive.turnDegreesAbsolute(5);
 
-	// pros::delay(1000);
-	// //distance, xdir, ydir, speed
-	// //gpsdrive(0.3, -1, 1, 30, leftDriveMotors, rightDriveMotors, gps);
-	// //gpsturn(120, 30, leftDriveMotors, rightDriveMotors, gps);
-	// MasterController.clear_line(0);
-	// MasterController.print(0, 0, "%s", "exit gps turn");
+	pros::delay(1000);
+	//distance, xdir, ydir, speed
+	//gpsdrive(0.3, -1, 1, 30, leftDriveMotors, rightDriveMotors, gps);
+	MasterController.clear_line(0);
+	gpsturn(120, 50, leftDriveMotors, rightDriveMotors, gps);
+	MasterController.print(0, 0, "%s", "Exit gps turn");
 
 }
 
@@ -139,6 +139,12 @@ void opcontrol()
 		
 		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		{
+			MasterController.clear_line(0);
+			gpsturncall(10, 50, 3, leftDriveMotors, rightDriveMotors, gps);
+			MasterController.print(0, 10, "%s", "Exit gps turn");
+		}
 		//GPS testing
 		double head = gps.get_heading();
 		pros::c::gps_status_s_t test = gps.get_status();
