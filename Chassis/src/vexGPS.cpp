@@ -12,6 +12,7 @@ speed is the speed to run the motors, negative if traveling backwards
 */ 
 void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps)
 {
+    //**************THIS FUNCTION DOES NOT WORK WELL AT ALL, DON'T USE********************//
     MasterController.print(0, 0, "%s", "enter gps drive");
     pros::delay(200);
     MasterController.clear_line(0);
@@ -48,47 +49,33 @@ void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMot
 
 void gpsturn(double tgt, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps)
 {
-    double tol = 10.0; //tolerance on turning
+    double tol = 10.0; // initial tolerance on turning
     double angle = gps.get_heading();
-    double pct;
-    int cw = 0, ccw = 0; //cw controls angle tolerance based on direction turning
-    pct = 1.0;
-    bool go = true, big = false;
+    double pct = 1.0; //percentage of the speed to have the motors run
+    int cw = 0, ccw = 0; //controls angle tolerance based on direction turning
+    bool go = true;
 
-    //should find an algorithm to determine clock vs counter
-    if(tgt > angle)// || ((270 < angle < 360) && (0 < tgt < 90)))
-        speed = -speed, cw = 1; //CW
+    if(tgt > angle || angle - tgt > 180)
+        speed = -speed, cw = 1; // Turn CW
     else if(tgt < angle)
-        speed = speed, ccw = 1; //CCW
-    if(abs(tgt - angle) > 100)
-        big = true;
-    //higher speed requires higher tolerance to hit tgt than lower speeds
-    //counter-clockwise
+        speed = speed, ccw = 1; //Turn CCW
+
+    //while outside tolerance range, turn
     while(((tgt - (cw * tol)) < angle < (tgt + (ccw * tol))) && go)
     {
+        //get angle from sensor
         angle = gps.get_heading();
         
+        //if close to tgt, slow down and set lower tolerance
         if((abs(tgt-angle)) < 40)
-            pct = 0.5, tol = 3;
-        else if(((abs(tgt-angle)) < 60) && big)
-            pct = 0.75;
+            pct = 0.5, tol = 2;
         right.move(speed * pct), left.move(-speed * pct);
         angle = gps.get_heading();
-        //MasterController.clear_line(0);
-        //MasterController.print(0, 0, "%f", angle);
-        if(((tgt) < angle) && (angle < (tgt + tol)))
+        //if in range, stop looping and brake motors
+        if((tgt < angle) && (angle < (tgt + tol)) && (tgt > angle - tol))
             right.brake(), left.brake(), go = false;
     }
     right.brake(), left.brake();
-    // angle = gps.get_heading();
-    // if((tgt - 3 < angle < tgt + 3))
-    //     recursion = false;
-    // if(recursion)
-    // {
-    //     MasterController.clear_line(0);
-    //     MasterController.print(0, 10, "%s", "Recursion");
-    //     gpsturn(tgt, ospeed, left, right, gps);
-    // }
         
     return;
 }
@@ -97,6 +84,7 @@ void gpsturncall(double tgt, double speed, int times, Mines::MinesMotorGroup lef
 {
     for(int i = 0; i < times; i++)
     {
+        //call turn a number of times to correct overshoots
         gpsturn(tgt, speed, left, right, gps);
         pros::delay(200);
     }
