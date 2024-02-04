@@ -89,16 +89,16 @@ void autonomous()
 	drive.driveTiles(1750);
 	drive.turnDegreesAbsolute(90);
 	//drive.setMaxDriveAccel(1);
-	drive.setActive(false);
+	drive.setActive(false); //PID turn off
 	leftDriveMotors.moveVelocity(12700);
 	rightDriveMotors.moveVelocity(12700);
-	pros::delay(700);
+	pros::delay(650); //how long bot moves no PID && prev { 620, 600, 700}
 	leftDriveMotors.brake();
 	rightDriveMotors.brake();
-	drive.setActive(true);
+	drive.setActive(true); //PID turn on
 	//drive.driveTiles(1400, 2000);
 	//drive.setMaxDriveAccel(0.12);
-	drive.driveTiles(-100);
+	drive.driveTiles(-70); //previous { -80, -100 }
 	drive.turnDegreesAbsolute(45);
 	drive.driveTiles(-2200);
 	for(int i = 0; i < 12; i++)
