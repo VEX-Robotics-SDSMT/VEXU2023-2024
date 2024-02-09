@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../include/main.h"
 #include "DiffDrive.h"
 #include "botFunctions.h"
 #include "globals.h"
@@ -34,7 +34,7 @@ void on_center_button() {
 
 void initialize() 
 {
-	intertialSensor.reset();
+	//intertialSensor.reset();
 	//pros::vision_signature_s_t RED_GOAL_SIG = vision.signature_from_utility(1, 4391, 7505, 5948, -1303, -147, -725, 1.6, 0);
 	//vision.set_signature(RED_GOAL_SIG_ID, &RED_GOAL_SIG);
 	//pros::vision_signature_s_t BLUE_GOAL_SIG = vision.signature_from_utility(2, -3073, -1323, -2198, 4405, 9923, 7164, 1.5, 0);
@@ -130,15 +130,7 @@ void opcontrol()
 		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
 		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
 
-		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
-		}
-		else
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
-		}
+		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 		//*********************************************
 
 		//*******************INTAKE******************

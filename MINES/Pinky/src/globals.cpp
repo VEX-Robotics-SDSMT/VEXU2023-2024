@@ -18,7 +18,6 @@ pros::Motor intake(INTAKE, pros::E_MOTOR_GEARSET_18, true);
 
 std::vector<pros::Motor> leftDriveVector = {left1, left2, left3};
 std::vector<pros::Motor> rightDriveVector = {right1, right2, right3};
-std::vector<pros::Motor> catapultVector = {cataRight, cataLeft};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 
