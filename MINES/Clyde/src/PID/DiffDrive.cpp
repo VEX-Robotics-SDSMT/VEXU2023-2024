@@ -1,4 +1,4 @@
-#include "DiffDrive.h"
+#include "../include/DiffDrive.h"
 
 using namespace Mines;
 using namespace std;

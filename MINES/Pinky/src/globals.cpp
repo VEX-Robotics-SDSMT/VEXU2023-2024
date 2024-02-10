@@ -7,9 +7,9 @@ pros::Imu intertialSensor(INERTIAL_SENSOR);
 pros::ADIEncoder driveEncoder(ENCODER_TOP, ENCODER_BOT, false);
 pros::GPS gps(VEX_GPS);
 
-pros::Motor left1(FRONTLEFT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor left2(MIDLEFT, pros::E_MOTOR_GEARSET_06, true); //
-pros::Motor left3(BACKLEFT, pros::E_MOTOR_GEARSET_06, false);
+pros::Motor left1(FRONTLEFT, pros::E_MOTOR_GEARSET_06, true);
+pros::Motor left2(MIDLEFT, pros::E_MOTOR_GEARSET_06, false); //
+pros::Motor left3(BACKLEFT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor right1(FRONTRIGHT, pros::E_MOTOR_GEARSET_06, false);
 pros::Motor right2(MIDRIGHT, pros::E_MOTOR_GEARSET_06, true);
 pros::Motor right3(BACKRIGHT, pros::E_MOTOR_GEARSET_06, false);

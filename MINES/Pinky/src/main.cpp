@@ -2,6 +2,7 @@
 #include "DiffDrive.h"
 #include "botFunctions.h"
 #include "globals.h"
+#include "pros/motors.h"
 #include "pros/rtos.h"
 
 //globals
@@ -75,19 +76,35 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	EncoderWheelSensorInterface encoderInterface(driveEncoder);
-	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(0.75, 0, 0);//0.2
-	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(2, 0, 0);//1.2
-	drive.setTurnPIDTol(2);
-	drive.setMaxDriveSpeed(1); 
-	drive.setMaxTurnSpeed(1);
+	leftDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
+	rightDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
+	leftDriveMotors.moveVelocity(-600);
+	rightDriveMotors.moveVelocity(-600);
+	pros::delay(1150);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+	pros::delay(1000);
 
-	drive.setMaxDriveAccel(0.12);
+	leftDriveMotors.moveVelocity(-600);
+	rightDriveMotors.moveVelocity(600);
+	pros::delay(395);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+	pros::delay(1000);
 
+	leftDriveMotors.moveVelocity(600);
+	rightDriveMotors.moveVelocity(600);
+	pros::delay(1550);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+	pros::delay(1000);
 
-	drive.killPIDs();
+	leftDriveMotors.moveVelocity(-600);
+	rightDriveMotors.moveVelocity(600);
+	pros::delay(405);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();	
+	intake.move_velocity(-600);
 }
 
 /**
@@ -135,9 +152,9 @@ void opcontrol()
 
 		//*******************INTAKE******************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
-			intake.move(100);
+			intake.move(100000);
 		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
-			intake.move(-100);
+			intake.move(-100000);
 		else
 			intake.brake();
 
