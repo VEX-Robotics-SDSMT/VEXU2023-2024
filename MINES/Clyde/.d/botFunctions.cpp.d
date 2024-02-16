@@ -82,7 +82,7 @@ bin/botFunctions.cpp.o: src/botFunctions.cpp \
  src/../include/pros/screen.hpp include/pros/screen.h \
  src/../include/pros/vision.hpp include/pros/vision.h \
  src/../include/pros/link.hpp include/pros/link.h \
- src/../include/MinesMotorGroup.h
+ src/../include/MinesMotorGroup.h include/pros/rtos.hpp
 src/../include/botFunctions.h:
 src/../include/globals.h:
 src/../include/api.h:
@@ -236,3 +236,4 @@ include/pros/vision.h:
 src/../include/pros/link.hpp:
 include/pros/link.h:
 src/../include/MinesMotorGroup.h:
+include/pros/rtos.hpp:

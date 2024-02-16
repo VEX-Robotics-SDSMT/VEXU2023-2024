@@ -1,20 +1,17 @@
-bin/PID/DiffDrive.cpp.o: src/PID/DiffDrive.cpp \
- include/../include/DiffDrive.h include/../include/MinesMotorGroup.h \
- include/../include/api.h include/../include/pros/adi.h \
- include/../include/pros/colors.h include/../include/pros/distance.h \
- include/../include/pros/ext_adi.h include/../include/pros/adi.h \
- include/pros/adi.h include/../include/pros/gps.h \
- include/../include/pros/imu.h include/../include/pros/link.h \
- include/../include/pros/llemu.h include/display/lvgl.h \
- include/display/lv_version.h include/display/lv_misc/lv_log.h \
- include/display/lv_conf.h include/display/lv_conf_checker.h \
- include/display/lv_misc/lv_task.h include/display/lv_misc/lv_mem.h \
- include/display/lv_misc/lv_log.h include/display/lv_misc/lv_ll.h \
- include/display/lv_hal/lv_hal.h include/display/lv_hal/lv_hal_disp.h \
- include/display/lv_hal/lv_hal.h include/display/lv_misc/lv_color.h \
- include/display/lv_misc/lv_area.h include/display/lv_hal/lv_hal_indev.h \
- include/display/lv_core/lv_obj.h include/display/lv_core/lv_style.h \
- include/display/lv_misc/lv_font.h \
+bin/PID/DiffDrive.cpp.o: src/PID/DiffDrive.cpp include/DiffDrive.h \
+ include/MinesMotorGroup.h include/api.h include/pros/adi.h \
+ include/pros/colors.h include/pros/distance.h include/pros/ext_adi.h \
+ include/pros/adi.h include/pros/adi.h include/pros/gps.h \
+ include/pros/imu.h include/pros/link.h include/pros/llemu.h \
+ include/display/lvgl.h include/display/lv_version.h \
+ include/display/lv_misc/lv_log.h include/display/lv_conf.h \
+ include/display/lv_conf_checker.h include/display/lv_misc/lv_task.h \
+ include/display/lv_misc/lv_mem.h include/display/lv_misc/lv_log.h \
+ include/display/lv_misc/lv_ll.h include/display/lv_hal/lv_hal.h \
+ include/display/lv_hal/lv_hal_disp.h include/display/lv_hal/lv_hal.h \
+ include/display/lv_misc/lv_color.h include/display/lv_misc/lv_area.h \
+ include/display/lv_hal/lv_hal_indev.h include/display/lv_core/lv_obj.h \
+ include/display/lv_core/lv_style.h include/display/lv_misc/lv_font.h \
  include/display/lv_misc/lv_symbol_def.h \
  include/display/lv_fonts/lv_font_builtin.h \
  include/display/lv_misc/lv_anim.h include/display/lv_misc/lv_mem.h \
@@ -67,38 +64,32 @@ bin/PID/DiffDrive.cpp.o: src/PID/DiffDrive.cpp \
  include/display/lv_objx/lv_arc.h include/display/lv_objx/lv_preload.h \
  include/display/lv_objx/lv_arc.h include/display/lv_objx/lv_calendar.h \
  include/display/lv_objx/lv_spinbox.h include/display/lv_objx/lv_ta.h \
- include/../include/pros/misc.h include/../include/pros/motors.h \
- include/../include/pros/optical.h include/api.h \
- include/../include/pros/rtos.h include/../include/pros/rotation.h \
- include/../include/pros/screen.h include/pros/colors.h \
- include/../include/pros/vision.h include/../include/pros/adi.hpp \
- include/../include/pros/distance.hpp include/pros/distance.h \
- include/../include/pros/gps.hpp include/pros/gps.h \
- include/../include/pros/imu.hpp include/pros/imu.h \
- include/../include/pros/llemu.hpp include/pros/llemu.h \
- include/../include/pros/misc.hpp include/pros/misc.h \
- include/../include/pros/motors.hpp include/pros/motors.h \
- include/../include/pros/optical.hpp include/pros/optical.h \
- include/../include/pros/rotation.hpp include/pros/rotation.h \
- include/../include/pros/rtos.hpp include/pros/rtos.h \
- include/../include/pros/screen.hpp include/pros/screen.h \
- include/../include/pros/vision.hpp include/pros/vision.h \
- include/../include/pros/link.hpp include/pros/link.h \
- include/../include/PID.h include/../include/Logger.h \
- include/../include/globals.h include/../include/TaskBase.h
-include/../include/DiffDrive.h:
-include/../include/MinesMotorGroup.h:
-include/../include/api.h:
-include/../include/pros/adi.h:
-include/../include/pros/colors.h:
-include/../include/pros/distance.h:
-include/../include/pros/ext_adi.h:
-include/../include/pros/adi.h:
+ include/pros/misc.h include/pros/motors.h include/pros/optical.h \
+ include/api.h include/pros/rtos.h include/pros/rotation.h \
+ include/pros/screen.h include/pros/colors.h include/pros/vision.h \
+ include/pros/adi.hpp include/pros/distance.hpp include/pros/distance.h \
+ include/pros/gps.hpp include/pros/gps.h include/pros/imu.hpp \
+ include/pros/imu.h include/pros/llemu.hpp include/pros/llemu.h \
+ include/pros/misc.hpp include/pros/misc.h include/pros/motors.hpp \
+ include/pros/motors.h include/pros/optical.hpp include/pros/optical.h \
+ include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
+ include/pros/rtos.h include/pros/screen.hpp include/pros/screen.h \
+ include/pros/vision.hpp include/pros/vision.h include/pros/link.hpp \
+ include/pros/link.h include/PID.h include/Logger.h include/globals.h \
+ include/TaskBase.h
+include/DiffDrive.h:
+include/MinesMotorGroup.h:
+include/api.h:
 include/pros/adi.h:
-include/../include/pros/gps.h:
-include/../include/pros/imu.h:
-include/../include/pros/link.h:
-include/../include/pros/llemu.h:
+include/pros/colors.h:
+include/pros/distance.h:
+include/pros/ext_adi.h:
+include/pros/adi.h:
+include/pros/adi.h:
+include/pros/gps.h:
+include/pros/imu.h:
+include/pros/link.h:
+include/pros/llemu.h:
 include/display/lvgl.h:
 include/display/lv_version.h:
 include/display/lv_misc/lv_log.h:
@@ -204,41 +195,41 @@ include/display/lv_objx/lv_arc.h:
 include/display/lv_objx/lv_calendar.h:
 include/display/lv_objx/lv_spinbox.h:
 include/display/lv_objx/lv_ta.h:
-include/../include/pros/misc.h:
-include/../include/pros/motors.h:
-include/../include/pros/optical.h:
-include/api.h:
-include/../include/pros/rtos.h:
-include/../include/pros/rotation.h:
-include/../include/pros/screen.h:
-include/pros/colors.h:
-include/../include/pros/vision.h:
-include/../include/pros/adi.hpp:
-include/../include/pros/distance.hpp:
-include/pros/distance.h:
-include/../include/pros/gps.hpp:
-include/pros/gps.h:
-include/../include/pros/imu.hpp:
-include/pros/imu.h:
-include/../include/pros/llemu.hpp:
-include/pros/llemu.h:
-include/../include/pros/misc.hpp:
 include/pros/misc.h:
-include/../include/pros/motors.hpp:
 include/pros/motors.h:
-include/../include/pros/optical.hpp:
 include/pros/optical.h:
-include/../include/pros/rotation.hpp:
-include/pros/rotation.h:
-include/../include/pros/rtos.hpp:
+include/api.h:
 include/pros/rtos.h:
-include/../include/pros/screen.hpp:
+include/pros/rotation.h:
 include/pros/screen.h:
-include/../include/pros/vision.hpp:
+include/pros/colors.h:
 include/pros/vision.h:
-include/../include/pros/link.hpp:
+include/pros/adi.hpp:
+include/pros/distance.hpp:
+include/pros/distance.h:
+include/pros/gps.hpp:
+include/pros/gps.h:
+include/pros/imu.hpp:
+include/pros/imu.h:
+include/pros/llemu.hpp:
+include/pros/llemu.h:
+include/pros/misc.hpp:
+include/pros/misc.h:
+include/pros/motors.hpp:
+include/pros/motors.h:
+include/pros/optical.hpp:
+include/pros/optical.h:
+include/pros/rotation.hpp:
+include/pros/rotation.h:
+include/pros/rtos.hpp:
+include/pros/rtos.h:
+include/pros/screen.hpp:
+include/pros/screen.h:
+include/pros/vision.hpp:
+include/pros/vision.h:
+include/pros/link.hpp:
 include/pros/link.h:
-include/../include/PID.h:
-include/../include/Logger.h:
-include/../include/globals.h:
-include/../include/TaskBase.h:
+include/PID.h:
+include/Logger.h:
+include/globals.h:
+include/TaskBase.h:

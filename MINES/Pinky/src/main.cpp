@@ -83,28 +83,47 @@ void autonomous()
 	pros::delay(1150);
 	leftDriveMotors.brake();
 	rightDriveMotors.brake();
-	pros::delay(1000);
+	pros::delay(500);
 
 	leftDriveMotors.moveVelocity(-600);
 	rightDriveMotors.moveVelocity(600);
-	pros::delay(395);
+	pros::delay(380);
 	leftDriveMotors.brake();
 	rightDriveMotors.brake();
-	pros::delay(1000);
+	pros::delay(250);
 
 	leftDriveMotors.moveVelocity(600);
 	rightDriveMotors.moveVelocity(600);
 	pros::delay(1550);
 	leftDriveMotors.brake();
 	rightDriveMotors.brake();
-	pros::delay(1000);
+	pros::delay(250);
 
 	leftDriveMotors.moveVelocity(-600);
 	rightDriveMotors.moveVelocity(600);
 	pros::delay(405);
 	leftDriveMotors.brake();
-	rightDriveMotors.brake();	
+	rightDriveMotors.brake();
+	wall.set_value(1);	
 	intake.move_velocity(-600);
+
+	pros::delay(37000);
+	leftDriveMotors.moveVelocity(-600);
+	rightDriveMotors.moveVelocity(-600);
+	pros::delay(250);
+	leftDriveMotors.moveVelocity(600);
+	rightDriveMotors.moveVelocity(600);
+	pros::delay(750);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+	pros::delay(500);
+	leftDriveMotors.moveVelocity(-600);
+	rightDriveMotors.moveVelocity(-600);
+	pros::delay(250);
+	leftDriveMotors.brake();
+	rightDriveMotors.brake();
+
+
 }
 
 /**

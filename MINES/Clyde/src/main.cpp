@@ -85,6 +85,8 @@ void autonomous()
 	drive.setMaxTurnSpeed(1);
 
 	drive.setMaxDriveAccel(0.12);
+	if(!skills)
+	{
 
 	drive.driveTiles(1750);
 	drive.turnDegreesAbsolute(90);
@@ -105,15 +107,33 @@ void autonomous()
 	{
 		catPrime(cataMotors, limitSwitch, -100);
 		pros::delay(500);
-		catLaunch(cataMotors, -127);
+		catLaunch(cataMotors, limitSwitch, -127);
 	}
 
 	drive.driveTiles(900);
 	drive.turnDegreesAbsolute(90);
-	drive.driveTiles(1500);
+	drive.driveTiles(750);
 	drive.turnDegreesAbsolute(100);
 
 	drive.killPIDs();
+	}
+	else
+	{
+		for(int i = 0; i < 23; i++)
+		{
+			catPrime(cataMotors, limitSwitch, -100);
+			pros::delay(750);
+			catLaunch(cataMotors, limitSwitch, -127);
+		}
+		drive.driveTiles(500);
+		drive.turnDegreesAbsolute(100);
+		drive.driveTiles(750, 1000);
+		drive.driveTiles(-100);
+		drive.turnDegreesAbsolute(10);
+		drive.driveTiles(3000);
+		drive.turnDegreesAbsolute(135);
+	}
+	
 }
 
 /**
@@ -172,7 +192,7 @@ void opcontrol()
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
 		{
 			if(limitSwitch.get_value() == true)
-				catLaunch(cataMotors, -127);
+				catLaunch(cataMotors, limitSwitch, -127);
 			else
 				catPrime(cataMotors, limitSwitch, -80);
 		}
