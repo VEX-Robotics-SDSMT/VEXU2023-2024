@@ -4,23 +4,23 @@
 #include "api.h"
 #include "MinesMotorGroup.h"
 
-#define INERTIAL_SENSOR 7
+#define INERTIAL_SENSOR 6
 #define VISION_SENSOR 3
 #define VEX_GPS 13
-#define ENCODER_TOP 7
-#define ENCODER_BOT 8
+#define ENCODER_TOP 2
+#define ENCODER_BOT 3
 
 #define L1 20
 #define L2 19
-#define L4 17
-#define R1 11
+#define L4 10
+#define R1 12
 #define R2 13
-#define R4 16
-#define LCat 10
-#define RCat 9
+#define R4 1
+#define LCat 9
+#define RCat 14
 #define WINGL 1
-#define WINGR 3
-#define LIMIT_SWITCH 6 //port for limitSwitch once added
+#define WINGR 5
+#define LIMIT_SWITCH 4 //port for limitSwitch once added
 
 #define CATAPULT_MOTOR_GEARSET redGearbox
 #define DRIVE_MOTOR_GEARSET blueGearbox
