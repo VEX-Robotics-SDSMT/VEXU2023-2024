@@ -75,6 +75,8 @@ void competition_initialize()
  */
 void autonomous() 
 {
+	// while(true)
+	// 	pros::screen::print(pros::text_format_e_t::E_TEXT_SMALL, 1, std::to_string(driveEncoder.get_value()).c_str());
 	EncoderWheelSensorInterface encoderInterface(driveEncoder);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
 	drive.setDrivePIDVals(0.75, 0, 0);//0.2
@@ -83,6 +85,11 @@ void autonomous()
 	drive.setTurnPIDTol(1);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
+
+	drive.setMaxDriveAccel(0.12);
+
+
+
 
 	drive.setMaxDriveAccel(0.12);
 	if(!skills)
@@ -127,39 +134,47 @@ void autonomous()
 		// 	catLaunch(cataMotors, limitSwitch, -127);
 		// }
 		drive.driveTiles(500);
-		drive.turnDegreesAbsolute(110);
+		drive.turnDegreesAbsolute(250);
 		drive.driveTiles(750, 750);
 		drive.driveTiles(-150);
-		drive.turnDegreesAbsolute(23);
+		drive.turnDegreesAbsolute(337);
+		pros::delay(3000);
 		drive.driveTiles(3100);
-		drive.turnDegreesAbsolute(292);
+		pros::delay(3000);
+		drive.turnDegreesAbsolute(68);
+		pros::delay(3000);
 
 
 		// *******************PHASE 2*******************
-		wingR.set_value(1);
+		wingL.set_value(1);
 		drive.driveTiles(900);
-		wingR.set_value(0);
+		pros::delay(3000);
+		wingL.set_value(0);
 		drive.driveTiles(-125);
-		drive.turnDegreesAbsolute(235);
+		pros::delay(3000);
+		drive.turnDegreesAbsolute(125);
+		pros::delay(3000);
 		drive.driveTiles(500);
+		pros::delay(3000);
 		wingL.set_value(1);
 		wingR.set_value(1);
+		pros::delay(30000);
 
 		// SWING TURN
 		drive.setActive(false);
-		leftDriveMotors.moveVelocity(310);
-		rightDriveMotors.moveVelocity(28);
+		leftDriveMotors.moveVelocity(28);
+		rightDriveMotors.moveVelocity(310);
 		pros::delay(750);
 		leftDriveMotors.brake();
 		rightDriveMotors.brake();
 		drive.setActive(true);
 
 		pros::delay(500);
-		drive.driveTiles(400);
+	 	drive.driveTiles(400);
 
 		
-		drive.killPIDs();
-	}
+	 	drive.killPIDs();
+	 }
 	
 }
 

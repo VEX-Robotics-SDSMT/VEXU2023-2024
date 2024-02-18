@@ -7,8 +7,8 @@
 #define INERTIAL_SENSOR 6
 #define VISION_SENSOR 3
 #define VEX_GPS 13
-#define ENCODER_TOP 2
-#define ENCODER_BOT 3
+#define ENCODER_TOP 7
+#define ENCODER_BOT 8
 
 #define L1 20
 #define L2 19
