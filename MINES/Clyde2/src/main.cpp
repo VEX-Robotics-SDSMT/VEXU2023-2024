@@ -89,6 +89,15 @@ void autonomous()
 	drive.setMaxDriveAccel(0.12);
 
 
+// PID TUNING
+	// drive.driveTiles(500);
+	// drive.driveTiles(-500);
+	// drive.turnDegreesAbsolute(180);
+	// drive.driveTiles(500);
+	// drive.driveTiles(-500);
+	// drive.turnDegreesAbsolute(0);
+	// return;
+
 
 
 	drive.setMaxDriveAccel(0.12);
@@ -138,40 +147,38 @@ void autonomous()
 		drive.driveTiles(750, 750);
 		drive.driveTiles(-150);
 		drive.turnDegreesAbsolute(337);
-		pros::delay(3000);
-		drive.driveTiles(3100);
-		pros::delay(3000);
-		drive.turnDegreesAbsolute(68);
-		pros::delay(3000);
+		//pros::delay(3000);
+		drive.driveTiles(3350);
+		//pros::delay(3000);
+		drive.turnDegreesAbsolute(67);
+		//pros::delay(3000);
 
 
 		// *******************PHASE 2*******************
 		wingL.set_value(1);
 		drive.driveTiles(900);
-		pros::delay(3000);
+		//pros::delay(3000);
 		wingL.set_value(0);
-		drive.driveTiles(-125);
-		pros::delay(3000);
-		drive.turnDegreesAbsolute(125);
-		pros::delay(3000);
-		drive.driveTiles(500);
-		pros::delay(3000);
+		drive.driveTiles(-25);
+		//pros::delay(3000);
+		drive.turnDegreesAbsolute(127);
+		//pros::delay(3000);
+		drive.driveTiles(400);
+		//pros::delay(3000);
 		wingL.set_value(1);
 		wingR.set_value(1);
-		pros::delay(30000);
 
 		// SWING TURN
 		drive.setActive(false);
 		leftDriveMotors.moveVelocity(28);
-		rightDriveMotors.moveVelocity(310);
+		rightDriveMotors.moveVelocity(325);
 		pros::delay(750);
 		leftDriveMotors.brake();
 		rightDriveMotors.brake();
 		drive.setActive(true);
 
-		pros::delay(500);
-	 	drive.driveTiles(400);
-
+		pros::delay(750);
+	 	drive.driveTiles(300);
 		
 	 	drive.killPIDs();
 	 }
@@ -194,23 +201,24 @@ void autonomous()
 
 void opcontrol()
 {	
+	bool cataTarget = 0; // 0 = unprimed, 1 = primed
 	while(true)
 	{	
 		// ********************DRIVE********************
 		// 2 stick arcade
-		//double leftAxisY = MasterController.get_analog(axisLeftY);
-		//double rightAxisX = MasterController.get_analog(axisRightX);
-		//double leftVelocity = ((leftAxisY + rightAxisX));
-		//double rightVelocity = ((leftAxisY - rightAxisX));
+		double leftAxisY = MasterController.get_analog(axisLeftY);
+		double rightAxisX = MasterController.get_analog(axisRightX);
+		double leftVelocity = ((leftAxisY + rightAxisX));
+		double rightVelocity = ((leftAxisY - rightAxisX));
 
 		// 1 stick arcade
-		double leftAxisY = MasterController.get_analog(axisLeftY);
-		double leftAxisX = MasterController.get_analog(axisLeftX);
-		double rightAxisX = MasterController.get_analog(axisRightX);
-		double aimVelocityLeft = (rightAxisX) * 0.06;
-		double aimVelocityRight = -rightAxisX * 0.06;
-		double leftVelocity = ((leftAxisY + leftAxisX + aimVelocityLeft));
-		double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
+		//double leftAxisY = MasterController.get_analog(axisLeftY);
+		//double leftAxisX = MasterController.get_analog(axisLeftX);
+		//double rightAxisX = MasterController.get_analog(axisRightX);
+		//double aimVelocityLeft = (rightAxisX) * 0.06;
+		//double aimVelocityRight = -rightAxisX * 0.06;
+		//double leftVelocity = ((leftAxisY + leftAxisX + aimVelocityLeft));
+		//double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
 
 		// Tank
 		// double leftAxisY = MasterController.get_analog(axisLeftY);
@@ -231,20 +239,25 @@ void opcontrol()
 
 		//*******************CATAPULT******************
 		//Sam will install limit switch to bring down a bit, stop to load, and then fire
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-			if(limitSwitch.get_value() == true)
-				catLaunch(cataMotors, limitSwitch, -127);
+			if(cataTarget == 0)
+			{
+				cataTarget = 1;
+			}				
 			else
-				catPrime(cataMotors, limitSwitch, -80);
+			{
+				cataTarget = 0;
+			}				
 		}
 		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
 			cataMotors.moveVelocity(127);
+			cataTarget = 0;
 		}
 		else
 		{
-			cataMotors.brake();
+			catLoop(cataMotors, limitSwitch, cataTarget);
 		}
 
 		//*******************WINGS**********************

@@ -157,6 +157,14 @@ void autonomous()
 		pros::delay(500);
 		drive.driveTiles(400);
 
+		drive.setActive(false);
+		leftDriveMotors.moveVelocity(325);
+		rightDriveMotors.moveVelocity(5);
+		pros::delay(750);
+		leftDriveMotors.brake();
+		rightDriveMotors.brake();
+		drive.setActive(true);
+
 		
 		drive.killPIDs();
 	}
@@ -179,6 +187,7 @@ void autonomous()
 
 void opcontrol()
 {	
+	int cataTarget = 0;
 	while(true)
 	{	
 		// ********************DRIVE********************
@@ -216,21 +225,27 @@ void opcontrol()
 
 		//*******************CATAPULT******************
 		//Sam will install limit switch to bring down a bit, stop to load, and then fire
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-			if(limitSwitch.get_value() == true)
-				catLaunch(cataMotors, limitSwitch, -127);
+			if(cataTarget == 0)
+			{
+				cataTarget = 1;
+			}				
 			else
-				catPrime(cataMotors, limitSwitch, -80);
+			{
+				cataTarget = 0;
+			}				
 		}
 		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
 		{
 			cataMotors.moveVelocity(127);
+			cataTarget = 0;
 		}
 		else
 		{
-			cataMotors.brake();
+			catLoop(cataMotors, limitSwitch, cataTarget);
 		}
+
 
 		//*******************WINGS**********************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_A))

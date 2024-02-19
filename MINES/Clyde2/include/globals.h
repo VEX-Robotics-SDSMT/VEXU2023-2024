@@ -15,7 +15,7 @@
 #define L4 10
 #define R1 12
 #define R2 13
-#define R4 1
+#define R4 4
 #define LCat 9
 #define RCat 14
 #define WINGL 1
