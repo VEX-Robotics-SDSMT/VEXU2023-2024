@@ -135,13 +135,14 @@ void autonomous()
 	}
 	else
 	{
-		// *******************PHASE 1*******************
-		// for(int i = 0; i < 23; i++)
-		// {
-		// 	catPrime(cataMotors, limitSwitch, -100);
-		// 	pros::delay(750);
-		// 	catLaunch(cataMotors, limitSwitch, -127);
-		// }
+		//*******************PHASE 1*******************
+		 for(int i = 0; i < 22; i++)
+		 {
+		 	catPrime(cataMotors, limitSwitch, -100);
+		 	pros::delay(500);
+		 	catLaunch(cataMotors, limitSwitch, -127);
+			pros::delay(400);
+		 }
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(250);
 		drive.driveTiles(750, 750);
@@ -169,6 +170,7 @@ void autonomous()
 		wingR.set_value(1);
 
 		// SWING TURN
+		int currentRot = leftDriveMotors.getPosition();
 		drive.setActive(false);
 		leftDriveMotors.moveVelocity(28);
 		rightDriveMotors.moveVelocity(325);
@@ -179,6 +181,15 @@ void autonomous()
 
 		pros::delay(750);
 	 	drive.driveTiles(300);
+
+		pros::delay(5000);
+
+		wingL.set_value(0);
+
+		drive.setMaxDriveAccel(1);
+
+		drive.driveTiles(1000);
+		drive.driveTiles(-1000);
 		
 	 	drive.killPIDs();
 	 }

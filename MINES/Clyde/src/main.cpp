@@ -79,8 +79,8 @@ void autonomous()
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
 	drive.setDrivePIDVals(0.75, 0, 0);//0.2
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(2, 0, 0);//1.2
-	drive.setTurnPIDTol(1);
+	drive.setTurnPIDVals(2.2, 0, 0);//1.2
+	drive.setTurnPIDTol(1.25);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
 
@@ -120,12 +120,13 @@ void autonomous()
 	else
 	{
 		// *******************PHASE 1*******************
-		// for(int i = 0; i < 23; i++)
-		// {
-		// 	catPrime(cataMotors, limitSwitch, -100);
-		// 	pros::delay(750);
-		// 	catLaunch(cataMotors, limitSwitch, -127);
-		// }
+		 for(int i = 0; i < 22; i++)
+		 {
+		 	catPrime(cataMotors, limitSwitch, -100);
+		 	pros::delay(500);
+		 	catLaunch(cataMotors, limitSwitch, -127);
+			pros::delay(400);
+		 }
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(110);
 		drive.driveTiles(750, 750);
@@ -147,7 +148,7 @@ void autonomous()
 
 		// SWING TURN
 		drive.setActive(false);
-		leftDriveMotors.moveVelocity(310);
+		leftDriveMotors.moveVelocity(315);
 		rightDriveMotors.moveVelocity(28);
 		pros::delay(750);
 		leftDriveMotors.brake();
@@ -157,13 +158,20 @@ void autonomous()
 		pros::delay(500);
 		drive.driveTiles(400);
 
-		drive.setActive(false);
-		leftDriveMotors.moveVelocity(325);
-		rightDriveMotors.moveVelocity(5);
-		pros::delay(750);
-		leftDriveMotors.brake();
-		rightDriveMotors.brake();
-		drive.setActive(true);
+		wingR.set_value(0);
+
+		drive.setMaxDriveAccel(1);
+
+		drive.driveTiles(1000);
+		drive.driveTiles(-1000);
+
+		// drive.setActive(false);
+		// leftDriveMotors.moveVelocity(325);
+		// rightDriveMotors.moveVelocity(5);
+		// pros::delay(750);
+		// leftDriveMotors.brake();
+		// rightDriveMotors.brake();
+		// drive.setActive(true);
 
 		
 		drive.killPIDs();
