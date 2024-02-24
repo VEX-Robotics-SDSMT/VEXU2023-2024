@@ -91,7 +91,7 @@ void autonomous()
 	//distance, xdir, ydir, speed
 	//gpsdrive(0.3, -1, 1, 30, leftDriveMotors, rightDriveMotors, gps);
 	MasterController.clear_line(0);
-	gpsturn(120, 50, leftDriveMotors, rightDriveMotors, gps);
+	gpsturncall(120, 50, 5, leftDriveMotors, rightDriveMotors, gps);
 	MasterController.print(0, 0, "%s", "Exit gps turn");
 
 }
@@ -112,6 +112,7 @@ void autonomous()
 
 void opcontrol()
 {	
+	
 	while(true)
 	{	
 		// ********************DRIVE********************
@@ -139,20 +140,28 @@ void opcontrol()
 		
 		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_B))
 		{
 			MasterController.clear_line(0);
-			gpsturncall(10, 50, 3, leftDriveMotors, rightDriveMotors, gps);
+			gpsturncall(180, 80, 5, leftDriveMotors, rightDriveMotors, gps);
 			MasterController.print(0, 10, "%s", "Exit gps turn");
 		}
+
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_X))
+		{
+			MasterController.clear_line(0);
+			gpsdrive(0.5, 1, -1, 50, leftDriveMotors, rightDriveMotors, gps);
+			MasterController.print(0, 10, "%s", "Exit gps drive");
+		}
+
 		//GPS testing
 		double head = gps.get_heading();
 		pros::c::gps_status_s_t test = gps.get_status();
 		double x = test.x;
 		double y = test.y;
+		MasterController.print(0, 0, "%f", x);
 		//MasterController.print(0, 0, "%f", head);
-		MasterController.print(0, 0, "%f", head);
-		//MasterController.print(0, 10, "%f", y);
+		MasterController.print(0, 10, "%f", y);
 		MasterController.clear_line(0);
 
 		//*********************************************

@@ -15,8 +15,8 @@ pros::Motor cataRight(RCat, pros::E_MOTOR_GEARSET_36, true);
 pros::Motor cataLeft(LCat, pros::E_MOTOR_GEARSET_36, false);
 
 
-std::vector<pros::Motor> leftDriveVector = {LeftFront, LeftRear};
-std::vector<pros::Motor> rightDriveVector = {RightFront, RightRear};
+std::vector<pros::Motor> leftDriveVector = {LeftRear, LeftFront};
+std::vector<pros::Motor> rightDriveVector = {RightRear, RightFront};
 std::vector<pros::Motor> catapultVector = {cataRight, cataLeft};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);

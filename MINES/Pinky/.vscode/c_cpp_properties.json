@@ -1,0 +1,30 @@
+{
+  "configurations": [
+    {
+      "name": "PROS Project",
+      "includePath": [
+        "${workspaceFolder}/**",
+        "c:\\Users\\101111485\\Desktop\\Robot Stuff\\VEXU2023-2024\\MINES\\Clyde\\include",
+        "c:\\Users\\101111485\\Desktop\\Robot Stuff\\VEXU2023-2024\\MINES\\Pinky\\include"
+      ],
+      "defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "c:\\Users\\101111485\\AppData\\Roaming\\Code\\User\\globalStorage\\sigbots.pros\\install\\pros-toolchain-windows\\usr\\bin\\arm-none-eabi-g++",
+      "cStandard": "gnu11",
+      "cppStandard": "gnu++20",
+      "intelliSenseMode": "gcc-arm",
+      "compileCommands": "c:\\Users\\101111485\\Desktop\\Robot Stuff\\VEXU2023-2024\\MINES\\Pinky\\compile_commands.json",
+      "browse": {
+        "path": [
+          "c:\\Users\\101111485\\Desktop\\Robot Stuff\\VEXU2023-2024\\MINES\\Pinky"
+        ],
+        "limitSymbolsToIncludedHeaders": true,
+        "databaseFilename": ""
+      }
+    }
+  ],
+  "version": 4
+}

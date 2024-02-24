@@ -13,9 +13,6 @@ speed is the speed to run the motors, negative if traveling backwards
 void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps)
 {
     //**************THIS FUNCTION DOES NOT WORK WELL AT ALL, DON'T USE********************//
-    MasterController.print(0, 0, "%s", "enter gps drive");
-    pros::delay(200);
-    MasterController.clear_line(0);
     pros::c::gps_status_s_t stat = gps.get_status();
 	double currx = stat.x;
 	double curry = stat.y;
@@ -30,7 +27,7 @@ void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMot
     double newy = curry + ydir*(addy);
     bool go = true;
 
-    //for now will test with an error tolerance of 100mm
+    //for now will test with an error tolerance of 10cm
     while(!((newx - 0.1) < currx < (newx + 0.1)) && !((newy - 0.1) < curry < (newy + 0.1)) && go)
     {
         right.move(speed), left.move(speed);
@@ -49,7 +46,7 @@ void gpsdrive(double distance, int xdir, int ydir, double speed, Mines::MinesMot
 
 void gpsturn(double tgt, double speed, Mines::MinesMotorGroup left, Mines::MinesMotorGroup right, pros::GPS gps)
 {
-    double tol = 10.0; // initial tolerance on turning
+    double tol = 5.0; // initial tolerance on turning
     double angle = gps.get_heading();
     double pct = 1.0; //percentage of the speed to have the motors run
     int cw = 0, ccw = 0; //controls angle tolerance based on direction turning
@@ -86,6 +83,8 @@ void gpsturncall(double tgt, double speed, int times, Mines::MinesMotorGroup lef
     {
         //call turn a number of times to correct overshoots
         gpsturn(tgt, speed, left, right, gps);
+        if(speed > 50)
+            speed = 50;
         pros::delay(200);
     }
 }

@@ -96,6 +96,7 @@ void opcontrol()
 {	
 	while(true)
 	{	
+		cataMotors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
 		// ********************DRIVE********************
 		// 2 stick arcade
 		double leftAxisY = MasterController.get_analog(axisLeftY);
@@ -117,15 +118,16 @@ void opcontrol()
 	    // double rightAxisY = MasterController.get_analog(axisRightY);
 		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
 		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
-
-		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
-		}
+		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R2))
+			cataMotors.move(-127);
+		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+			cataMotors.move(127);
 		else
-		{
-			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
-		}
+			cataMotors.brake();
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
+			wings.set_value(1);
+		else
+			wings.set_value(0);
 	}
 }

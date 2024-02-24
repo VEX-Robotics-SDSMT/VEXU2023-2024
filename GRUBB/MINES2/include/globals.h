@@ -9,12 +9,12 @@
 #define VEX_GPS 13
 
 #define RightF 12 //motor ports
-#define RightR 11
-#define LeftF 19
-#define LeftR 20
-#define LCat 17 //catapult motors
-#define RCat 16
-#define WING 1
+#define RightR 1
+#define LeftF 13
+#define LeftR 7
+#define LCat 15 //catapult motors
+#define RCat 11
+#define WING 8
 
 //06 corresponds to blue
 //18 corresponds to green
