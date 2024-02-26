@@ -11,7 +11,7 @@ void driveLoop(Mines::MinesMotorGroup leftMotorGroup, Mines::MinesMotorGroup rig
 void catLaunch(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch, double velocity)
 {    
     cataMotors.move(velocity);
-    pros::delay(100);
+    pros::delay(150);
     cataMotors.brake();
 }
 

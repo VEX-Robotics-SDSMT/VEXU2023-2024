@@ -2,7 +2,9 @@
 #include "DiffDrive.h"
 #include "botFunctions.h"
 #include "globals.h"
+#include "pros/misc.h"
 #include "pros/rtos.h"
+#include "pros/rtos.hpp"
 
 //globals
 
@@ -79,10 +81,10 @@ void autonomous()
 	// 	pros::screen::print(pros::text_format_e_t::E_TEXT_SMALL, 1, std::to_string(driveEncoder.get_value()).c_str());
 	EncoderWheelSensorInterface encoderInterface(driveEncoder);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(0.75, 0, 0);//0.2
+	drive.setDrivePIDVals(0.85, 0, 0);//0.75
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(2, 0, 0);//1.2
-	drive.setTurnPIDTol(1);
+	drive.setTurnPIDVals(3.6, 0, 0);//2.4
+	drive.setTurnPIDTol(1.5);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
 
@@ -136,35 +138,33 @@ void autonomous()
 	else
 	{
 		//*******************PHASE 1*******************
-		 for(int i = 0; i < 22; i++)
-		 {
-		 	catPrime(cataMotors, limitSwitch, -100);
-		 	pros::delay(500);
-		 	catLaunch(cataMotors, limitSwitch, -127);
-			pros::delay(400);
-		 }
+		for(int i = 0; i < 22; i++)
+		{
+			catPrime(cataMotors, limitSwitch, -100);
+			pros::delay(300);
+			catLaunch(cataMotors, limitSwitch, -127);
+			pros::delay(650);
+		}
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(250);
 		drive.driveTiles(750, 750);
 		drive.driveTiles(-150);
-		drive.turnDegreesAbsolute(337);
+		drive.turnDegreesAbsolute(338);
 		//pros::delay(3000);
-		drive.driveTiles(3350);
+		drive.driveTiles(3250);
 		//pros::delay(3000);
 		drive.turnDegreesAbsolute(67);
 		//pros::delay(3000);
 
 
 		// *******************PHASE 2*******************
-		wingL.set_value(1);
 		drive.driveTiles(900);
 		//pros::delay(3000);
-		wingL.set_value(0);
 		drive.driveTiles(-25);
 		//pros::delay(3000);
 		drive.turnDegreesAbsolute(127);
 		//pros::delay(3000);
-		drive.driveTiles(400);
+		drive.driveTiles(300);
 		//pros::delay(3000);
 		wingL.set_value(1);
 		wingR.set_value(1);
@@ -179,17 +179,16 @@ void autonomous()
 		rightDriveMotors.brake();
 		drive.setActive(true);
 
-		pros::delay(750);
-	 	drive.driveTiles(300);
-
-		pros::delay(5000);
-
-		wingL.set_value(0);
+		//pros::delay(750);
+	 	drive.driveTiles(300);	
+		pros::delay(3000);	
 
 		drive.setMaxDriveAccel(1);
 
-		drive.driveTiles(1000);
-		drive.driveTiles(-1000);
+		drive.driveTiles(1000, 2000);
+		wingL.set_value(0);
+		wingR.set_value(0);
+		drive.driveTiles(-2000);
 		
 	 	drive.killPIDs();
 	 }
@@ -213,6 +212,7 @@ void autonomous()
 void opcontrol()
 {	
 	bool cataTarget = 0; // 0 = unprimed, 1 = primed
+	bool wallToggle = 0;
 	while(true)
 	{	
 		// ********************DRIVE********************
@@ -272,7 +272,17 @@ void opcontrol()
 		}
 
 		//*******************WINGS**********************
+
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_A))
+		{
+			if(wallToggle == 0)
+				wallToggle = 1;
+			else
+				wallToggle = 0;
+			pros::delay(200);
+		}
+
+		if(wallToggle)
 		{
 			wingL.set_value(1);
 			wingR.set_value(1);
@@ -287,6 +297,20 @@ void opcontrol()
 			wingR.set_value(0);
 		}
 		
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			for(int i = 0; i < 22; i++)
+			{
+		 		catPrime(cataMotors, limitSwitch, -100);
+		 		pros::delay(300);
+		 		catLaunch(cataMotors, limitSwitch, -127);
+		 		pros::delay(650);
+				if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+					break;
+		 	}			
+		   }
+		}
+
 		
 	}
-}
+

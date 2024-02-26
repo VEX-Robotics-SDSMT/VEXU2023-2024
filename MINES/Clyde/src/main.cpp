@@ -2,6 +2,7 @@
 #include "DiffDrive.h"
 #include "botFunctions.h"
 #include "globals.h"
+#include "pros/misc.h"
 #include "pros/rtos.h"
 
 //globals
@@ -77,9 +78,9 @@ void autonomous()
 {
 	EncoderWheelSensorInterface encoderInterface(driveEncoder);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(0.75, 0, 0);//0.2
+	drive.setDrivePIDVals(0.85, 0, 0);//0.75
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(2.2, 0, 0);//1.2
+	drive.setTurnPIDVals(3.4, 0, 0);//3.5
 	drive.setTurnPIDTol(1.25);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
@@ -120,13 +121,18 @@ void autonomous()
 	else
 	{
 		// *******************PHASE 1*******************
-		 for(int i = 0; i < 22; i++)
-		 {
-		 	catPrime(cataMotors, limitSwitch, -100);
-		 	pros::delay(500);
-		 	catLaunch(cataMotors, limitSwitch, -127);
-			pros::delay(400);
-		 }
+
+			catPrime(cataMotors, limitSwitch, -100);
+		   	pros::delay(500);
+		   	catLaunch(cataMotors, limitSwitch, -127);
+		  	pros::delay(600);
+		   for(int i = 0; i < 21; i++)
+		   {
+		   	catPrime(cataMotors, limitSwitch, -100);
+		   	pros::delay(335);
+		   	catLaunch(cataMotors, limitSwitch, -127);
+		  	pros::delay(600);
+		   }
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(110);
 		drive.driveTiles(750, 750);
@@ -142,28 +148,31 @@ void autonomous()
 		wingR.set_value(0);
 		drive.driveTiles(-125);
 		drive.turnDegreesAbsolute(235);
-		drive.driveTiles(500);
+		drive.driveTiles(350);
 		wingL.set_value(1);
 		wingR.set_value(1);
 
 		// SWING TURN
 		drive.setActive(false);
-		leftDriveMotors.moveVelocity(315);
+		leftDriveMotors.moveVelocity(330);
 		rightDriveMotors.moveVelocity(28);
 		pros::delay(750);
 		leftDriveMotors.brake();
 		rightDriveMotors.brake();
 		drive.setActive(true);
 
-		pros::delay(500);
-		drive.driveTiles(400);
+		
+		drive.driveTiles(200);
 
-		wingR.set_value(0);
 
 		drive.setMaxDriveAccel(1);
 
-		drive.driveTiles(1000);
-		drive.driveTiles(-1000);
+		wingR.set_value(0);
+		//pros::delay(3000);
+		drive.driveTiles(1500, 1500);
+		wingR.set_value(0);
+		wingL.set_value(0);
+		drive.driveTiles(-2000);
 
 		// drive.setActive(false);
 		// leftDriveMotors.moveVelocity(325);
@@ -269,6 +278,23 @@ void opcontrol()
 		{
 			wingL.set_value(0);
 			wingR.set_value(0);
+		}
+
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			catPrime(cataMotors, limitSwitch, -100);
+		   	pros::delay(500);
+		   	catLaunch(cataMotors, limitSwitch, -127);
+		  	pros::delay(600);
+		   for(int i = 0; i < 21; i++)
+		   {
+		   	catPrime(cataMotors, limitSwitch, -100);
+		   	pros::delay(335);
+		   	catLaunch(cataMotors, limitSwitch, -127);
+		  	pros::delay(600);
+			if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+				break;
+		   }
 		}
 		
 		
