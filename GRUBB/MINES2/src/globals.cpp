@@ -11,8 +11,8 @@ pros::Motor RightFront(RightF, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor RightRear(RightR, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor LeftFront(LeftF, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor LeftRear(LeftR, pros::E_MOTOR_GEARSET_18, true);
-pros::Motor cataRight(RCat, pros::E_MOTOR_GEARSET_36, true);
-pros::Motor cataLeft(LCat, pros::E_MOTOR_GEARSET_36, false);
+pros::Motor cataRight(RCat, pros::E_MOTOR_GEARSET_36, false);
+pros::Motor cataLeft(LCat, pros::E_MOTOR_GEARSET_36, true);
 
 
 std::vector<pros::Motor> leftDriveVector = {LeftFront, LeftRear};
@@ -23,6 +23,7 @@ Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 Mines::MinesMotorGroup cataMotors(catapultVector);
 
 pros::ADIDigitalOut wings(WING);
+pros::ADIDigitalIn limitSwitch(LIMIT_SWITCH);
 
 
 double axisPercentBlue = 600.0 / 127;
