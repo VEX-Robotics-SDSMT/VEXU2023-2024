@@ -94,8 +94,11 @@ void autonomous()
 
 void opcontrol()
 {	
+	bool cataTarget = 0; // 0 = unprimed, 1 = primed
 	while(true)
 	{	
+		
+
 		// ********************DRIVE********************
 		// 2 stick arcade
 		double leftAxisY = MasterController.get_analog(axisLeftY);
@@ -117,15 +120,34 @@ void opcontrol()
 	    // double rightAxisY = MasterController.get_analog(axisRightY);
 		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
 		// double rightVelocity = ((-rightAxisY) * axisPercentBlue);
-
-		// If the driver is holding B, drive at 30% speed to aim easier, otherwise drive using the values found anbove
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_B))
+		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
+		
+		//CATAPULT
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2))
 		{
-			driveLoop(leftDriveMotors, rightDriveMotors, .3*leftVelocity, .3*rightVelocity);
+			if(cataTarget == 0)
+			{
+				cataTarget = 1;
+			}				
+			else
+			{
+				cataTarget = 0;
+			}				
+		}
+		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
+		{
+			cataMotors.moveVelocity(127);
+			cataTarget = 0;
 		}
 		else
 		{
-			driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
+			catLoop(cataMotors, limitSwitch, cataTarget);
 		}
+
+		//WINGS
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
+			wings.set_value(1);
+		else
+			wings.set_value(0);
 	}
 }

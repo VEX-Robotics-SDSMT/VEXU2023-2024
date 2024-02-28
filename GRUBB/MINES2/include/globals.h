@@ -8,13 +8,14 @@
 #define VISION_SENSOR 3
 #define VEX_GPS 13
 
-#define RightF 12 //motor ports
-#define RightR 11
-#define LeftF 19
-#define LeftR 20
-#define LCat 17 //catapult motors
-#define RCat 16
-#define WING 1
+#define RightF 7 //motor ports
+#define RightR 13
+#define LeftF 1
+#define LeftR 12
+#define LCat 11 //catapult motors
+#define RCat 2
+#define WING 8
+#define LIMIT_SWITCH 6
 
 //06 corresponds to blue
 //18 corresponds to green
@@ -35,6 +36,7 @@ extern pros::Motor catR;
 extern pros::Motor catL;
 
 extern pros::ADIDigitalOut wings;
+extern pros::ADIDigitalIn limitSwitch; 
 
 extern std::vector<pros::Motor> leftDriveVector;
 extern std::vector<pros::Motor> rightDriveVector;
