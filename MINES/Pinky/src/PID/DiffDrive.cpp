@@ -23,8 +23,8 @@ DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, pros::IMU imu)
 DiffDrive::DiffDrive(MinesMotorGroup left, MinesMotorGroup right, SensorInterface *driveSensors, pros::Imu imu):
     leftMotors(left), rightMotors(right), inertial(imu),
     driveInterface(this), turnInterface(this),
-    drivePID(&driveInterface, LoggerSettings::none), turnPID(&turnInterface, LoggerSettings::none),
-    logger(LoggerSettings::verbose)
+    drivePID(&driveInterface, LoggerSettings::verbose), turnPID(&turnInterface, LoggerSettings::none),
+    logger(LoggerSettings::none)
 {
     MAX_SPEED = rightMotors.getMaxVelocity();
 
@@ -344,19 +344,21 @@ void SensorInterface::Reset()
 
 
 //Encoder Wheel Sensor
-EncoderWheelSensorInterface::EncoderWheelSensorInterface(pros::ADIEncoder encoder) : encoder(encoder) {}
+EncoderWheelSensorInterface::EncoderWheelSensorInterface(pros::ADIEncoder encoderL, pros::ADIEncoder encoderR) : encoderL(encoderL), encoderR(encoderR) {}
 
 double EncoderWheelSensorInterface::Get()
 {
-    double sensorVal = encoder.get_value();
-    std::cout << "encoder val: " << sensorVal <<"errno:" <<errno <<  "\n";
-
-    return sensorVal;
+    double sensorValL = encoderL.get_value();
+    double sensorValR = encoderR.get_value();
+    //std::cout << "encoder val: " << sensorVal <<"errno:" <<errno <<  "\n";
+    double avg = (sensorValL + sensorValR) / 2;
+    return avg;
 }
 
 void EncoderWheelSensorInterface::Reset()
 {
-    encoder.reset();
+    encoderL.reset();
+    encoderR.reset();
 }
 
 //Motor Wheel Sensor

@@ -76,52 +76,69 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	leftDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	rightDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	leftDriveMotors.moveVelocity(-600);
-	rightDriveMotors.moveVelocity(-600);
-	pros::delay(1150);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
-	pros::delay(500);
+	EncoderWheelSensorInterface encoderInterface(driveEncoderL, driveEncoderR);
+	//SensorInterface driveInterface(leftDriveMotors, rightDriveMotors);
+	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
+	drive.setDrivePIDVals(2.75, 0, 0);//0.85
+	drive.setDrivePIDTol(50);
+	drive.setTurnPIDVals(2, 0, 0);//3.5
+	drive.setTurnPIDTol(1.25);
+	drive.setMaxDriveSpeed(1); 
+	drive.setMaxTurnSpeed(1);
+	drive.setMaxDriveAccel(0.12);
+	drive.setMaxTurnAccel(0.12);
 
-	leftDriveMotors.moveVelocity(-600);
-	rightDriveMotors.moveVelocity(600);
-	pros::delay(380);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
-	pros::delay(250);
+	drive.driveTiles(500);
+	drive.driveTiles(-500);
+	// drive.turnDegreesAbsolute(180);
+	// drive.turnDegreesAbsolute(0);
 
-	leftDriveMotors.moveVelocity(600);
-	rightDriveMotors.moveVelocity(600);
-	pros::delay(1550);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
-	pros::delay(250);
+	// leftDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
+	// rightDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
+	// leftDriveMotors.moveVelocity(-600);
+	// rightDriveMotors.moveVelocity(-600);
+	// pros::delay(1150);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
+	// pros::delay(500);
 
-	leftDriveMotors.moveVelocity(-600);
-	rightDriveMotors.moveVelocity(600);
-	pros::delay(405);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
-	wall.set_value(1);	
-	intake.move_velocity(-600);
+	// leftDriveMotors.moveVelocity(-600);
+	// rightDriveMotors.moveVelocity(600);
+	// pros::delay(380);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
+	// pros::delay(250);
 
-	pros::delay(37000);
-	leftDriveMotors.moveVelocity(-600);
-	rightDriveMotors.moveVelocity(-600);
-	pros::delay(250);
-	leftDriveMotors.moveVelocity(600);
-	rightDriveMotors.moveVelocity(600);
-	pros::delay(750);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
-	pros::delay(500);
-	leftDriveMotors.moveVelocity(-600);
-	rightDriveMotors.moveVelocity(-600);
-	pros::delay(250);
-	leftDriveMotors.brake();
-	rightDriveMotors.brake();
+	// leftDriveMotors.moveVelocity(600);
+	// rightDriveMotors.moveVelocity(600);
+	// pros::delay(1550);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
+	// pros::delay(250);
+
+	// leftDriveMotors.moveVelocity(-600);
+	// rightDriveMotors.moveVelocity(600);
+	// pros::delay(405);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
+	// wall.set_value(1);	
+	// intake.move_velocity(-600);
+
+	// pros::delay(37000);
+	// leftDriveMotors.moveVelocity(-600);
+	// rightDriveMotors.moveVelocity(-600);
+	// pros::delay(250);
+	// leftDriveMotors.moveVelocity(600);
+	// rightDriveMotors.moveVelocity(600);
+	// pros::delay(750);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
+	// pros::delay(500);
+	// leftDriveMotors.moveVelocity(-600);
+	// rightDriveMotors.moveVelocity(-600);
+	// pros::delay(250);
+	// leftDriveMotors.brake();
+	// rightDriveMotors.brake();
 
 
 }

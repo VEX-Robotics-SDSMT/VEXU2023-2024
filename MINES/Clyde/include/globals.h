@@ -20,6 +20,7 @@
 #define RCat 9
 #define WINGL 1
 #define WINGR 3
+#define HANG 4
 #define TRACKINGWHEEL 2
 #define LIMIT_SWITCH 6 //port for limitSwitch once added
 
@@ -42,6 +43,7 @@ extern pros::Motor right4;
 extern pros::ADIDigitalOut wingL;
 extern pros::ADIDigitalOut wingR;
 extern pros::ADIDigitalOut tracking;
+extern pros::ADIDigitalOut hang;
 extern pros::ADIDigitalIn limitSwitch;
 
 extern std::vector<pros::Motor> leftDriveVector;

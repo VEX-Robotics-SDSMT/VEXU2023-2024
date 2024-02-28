@@ -4,10 +4,12 @@
 #include "api.h"
 #include "MinesMotorGroup.h"
 
-#define INERTIAL_SENSOR 6 //not in yet
+#define INERTIAL_SENSOR 9 //not in yet
 #define VEX_GPS 13
-#define ENCODER_TOP 7
-#define ENCODER_BOT 8
+#define ENCODERR_TOP 8
+#define ENCODERR_BOT 7
+#define ENCODERL_TOP 6
+#define ENCODERL_BOT 5
 
 #define BACKRIGHT 21
 #define MIDRIGHT 10
@@ -25,7 +27,9 @@ extern pros::Controller MasterController;
 
 extern pros::Imu intertialSensor;
 extern pros::GPS gps;
-extern pros::ADIEncoder driveEncoder;
+extern pros::ADIEncoder driveEncoderL;
+extern pros::ADIEncoder driveEncoderR;
+
 
 extern pros::Motor left1;
 extern pros::Motor left2;

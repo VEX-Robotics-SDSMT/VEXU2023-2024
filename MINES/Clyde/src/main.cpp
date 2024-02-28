@@ -271,14 +271,23 @@ void opcontrol()
 			wingL.set_value(1);
 			wingR.set_value(1);
 		}		
-		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_LEFT))
+		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_L2))
 			wingL.set_value(1);
-		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT))
+		else if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_L1))
 			wingR.set_value(1);	
 		else
 		{
 			wingL.set_value(0);
 			wingR.set_value(0);
+		}
+
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_X))
+		{
+			hang.set_value(1);
+		}
+		else
+		{
+			hang.set_value(0);
 		}
 
 		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN))

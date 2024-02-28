@@ -28,6 +28,7 @@ Mines::MinesMotorGroup cataMotors(catapultVector);
 pros::ADIDigitalOut wingL(WINGL);
 pros::ADIDigitalOut tracking(TRACKINGWHEEL);
 pros::ADIDigitalOut wingR(WINGR);
+pros::ADIDigitalOut hang(HANG);
 pros::ADIDigitalIn limitSwitch(LIMIT_SWITCH);
 
 
