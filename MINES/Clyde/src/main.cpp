@@ -205,6 +205,7 @@ void autonomous()
 void opcontrol()
 {	
 	int cataTarget = 0;
+	tracking.set_value(1);
 	while(true)
 	{	
 		// ********************DRIVE********************
