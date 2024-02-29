@@ -75,6 +75,18 @@ void competition_initialize()
  */
 void autonomous() 
 {
+	rightDriveMotors.move(20);
+	leftDriveMotors.move(20);
+	for(int i = 0; i < 22; i++) {
+		catPrime(cataMotors, limitSwitch, -70);
+		pros::delay(1200);	//time at bottom
+		cataMotors.move(127);
+		pros::delay(300);
+		cataMotors.brake();
+		pros::delay(500);	//time b4 next launch
+	}
+	rightDriveMotors.brake();
+	leftDriveMotors.brake();
 	
 }
 
@@ -142,6 +154,10 @@ void opcontrol()
 		else
 		{
 			catLoop(cataMotors, limitSwitch, cataTarget);
+		}
+
+		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+			cataMotors.move(-127);
 		}
 
 		//WINGS

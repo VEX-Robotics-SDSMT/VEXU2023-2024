@@ -17,7 +17,7 @@ void catLoop(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch, 
 {
     cataMotors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
     if(limitSwitch.get_value() != cataTarget)
-        cataMotors.moveVelocity(-127);
+        cataMotors.moveVelocity(-70);
     else
         cataMotors.brake();
 }
@@ -29,7 +29,7 @@ void catPrime(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch,
     while(limitSwitch.get_value() == false)
     {
         cataMotors.move(velocity);
-        pros::delay(10);
+        pros::delay(5);
     }
     cataMotors.brake();
 

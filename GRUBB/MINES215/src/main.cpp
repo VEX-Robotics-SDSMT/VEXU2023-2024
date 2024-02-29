@@ -75,8 +75,32 @@ void competition_initialize()
  */
 void autonomous() 
 {
-	
+	//********************MINES2 15in SKILLS********************************
+	if(skills) {
+		//back up slowly to keep bot in shooting position
+		leftDriveMotors.move(-20);
+		rightDriveMotors.move(-20);
+		for(int i = 0; i < 22; i++) {
+			catPrime(cataMotors, limitSwitch, -80);
+			pros::delay(1500);  //time at bottom before launching
+			cataMotors.move(127);
+			pros::delay(200);
+			cataMotors.brake();
+			pros::delay(500);  //time before next drop down
+		}
+		leftDriveMotors.brake();
+		rightDriveMotors.brake();
+
+		
+	}
+	//************MINES2 15in AUTO******************************************
+	else {
+
+	}
+ 	
+
 }
+
 
 /**
  * Runs the operator control code. This function will be started in its own task
