@@ -89,18 +89,18 @@ void autonomous()
 	if(!skills)
 	{
 		//**************SHOOT 10***********************
-		// pros::delay(10000); //change for pinky
-		// catPrime(cataMotors, limitSwitch, -100);
-		// pros::delay(500);
-	   	// catLaunch(cataMotors, limitSwitch, -127);
-		// pros::delay(600);
-	    // for(int i = 0; i < 9; i++)
-	    // {
-	   	// 	catPrime(cataMotors, limitSwitch, -100);
-	   	// 	pros::delay(335);
-	   	// 	catLaunch(cataMotors, limitSwitch, -127);
-	  	// 	pros::delay(600);
-		//  }
+		//pros::delay(15000); //change for pinky
+		//catPrime(cataMotors, limitSwitch, -100);
+		//pros::delay(500);
+	   	//catLaunch(cataMotors, limitSwitch, -127);
+		//pros::delay(600);
+	    //for(int i = 0; i < 9; i++)
+	    //{
+	   	//	catPrime(cataMotors, limitSwitch, -100);
+	   	//	pros::delay(335);
+	   	//	catLaunch(cataMotors, limitSwitch, -127);
+	  	//	pros::delay(600);
+		//}
 
 		//*************POP TRIBALL*********************
 		drive.driveTiles(150);
@@ -108,14 +108,16 @@ void autonomous()
 		drive.turnDegreesAbsolute(260);
 		//pros::delay(1000);
 		wingL.set_value(1);
+		drive.setMaxDriveSpeed(0.5);
 		//pros::delay(1000);
 		drive.driveTiles(500);
+		drive.setMaxDriveSpeed(1);
 		//pros::delay(500);
 		wingL.set_value(0);
 
 		//**************PUSH UNDER*********************
-		drive.turnDegreesAbsolute(290);
-		drive.driveTiles(600, 1500);
+		drive.turnDegreesAbsolute(295);
+		drive.driveTiles(450, 1000);
 		drive.driveTiles(-600);
 
 		//**************GO TOUCH BAR******************
@@ -129,33 +131,29 @@ void autonomous()
 	{
 		// *******************PHASE 1*******************
 
-			catPrime(cataMotors, limitSwitch, -100);
-		   	pros::delay(500);
-		   	catLaunch(cataMotors, limitSwitch, -127);
-		  	pros::delay(600);
-		   for(int i = 0; i < 21; i++)
-		   {
-		   	catPrime(cataMotors, limitSwitch, -100);
-		   	pros::delay(335);
-		   	catLaunch(cataMotors, limitSwitch, -127);
-		  	pros::delay(600);
-		   }
+		//catPrime(cataMotors, limitSwitch, -100);
+		//pros::delay(500);
+		//catLaunch(cataMotors, limitSwitch, -127);
+		//pros::delay(600);
+		//for(int i = 0; i < 21; i++)
+		//{
+		//	catPrime(cataMotors, limitSwitch, -100);
+		//	pros::delay(335);
+		//	catLaunch(cataMotors, limitSwitch, -127);
+		//	pros::delay(600);
+		//}
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(110);
-		drive.driveTiles(750, 750);
-		drive.driveTiles(-150);
+		drive.driveTiles(425);
 		drive.turnDegreesAbsolute(23);
 		drive.driveTiles(3100);
 		drive.turnDegreesAbsolute(292);
 
 
 		// *******************PHASE 2*******************
-		wingR.set_value(1);
-		drive.driveTiles(900);
-		wingR.set_value(0);
-		drive.driveTiles(-125);
+		drive.driveTiles(800);
 		drive.turnDegreesAbsolute(235);
-		drive.driveTiles(350);
+		drive.driveTiles(400);
 		wingL.set_value(1);
 		wingR.set_value(1);
 
@@ -174,12 +172,14 @@ void autonomous()
 
 		drive.setMaxDriveAccel(1);
 
-		wingR.set_value(0);
+		//wingR.set_value(0);
 		//pros::delay(3000);
 		drive.driveTiles(1500, 1500);
 		wingR.set_value(0);
 		wingL.set_value(0);
-		drive.driveTiles(-2000);
+		drive.driveTiles(-1500);
+		wingR.set_value(1);
+		wingL.set_value(1);
 
 		// drive.setActive(false);
 		// leftDriveMotors.moveVelocity(325);

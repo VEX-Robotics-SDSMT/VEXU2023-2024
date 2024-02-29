@@ -81,65 +81,50 @@ void autonomous()
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
 	drive.setDrivePIDVals(2.75, 0, 0);//0.85
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(2, 0, 0);//3.5
+	drive.setTurnPIDVals(4.45, 0, 0);//3.5
 	drive.setTurnPIDTol(1.25);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
 	drive.setMaxDriveAccel(0.12);
 	drive.setMaxTurnAccel(0.12);
 
-	drive.driveTiles(500);
-	drive.driveTiles(-500);
-	// drive.turnDegreesAbsolute(180);
-	// drive.turnDegreesAbsolute(0);
-
-	// leftDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	// rightDriveMotors.setBrakeMode(pros::E_MOTOR_BRAKE_BRAKE);
-	// leftDriveMotors.moveVelocity(-600);
-	// rightDriveMotors.moveVelocity(-600);
-	// pros::delay(1150);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-	// pros::delay(500);
-
-	// leftDriveMotors.moveVelocity(-600);
-	// rightDriveMotors.moveVelocity(600);
-	// pros::delay(380);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-	// pros::delay(250);
-
-	// leftDriveMotors.moveVelocity(600);
-	// rightDriveMotors.moveVelocity(600);
-	// pros::delay(1550);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-	// pros::delay(250);
-
-	// leftDriveMotors.moveVelocity(-600);
-	// rightDriveMotors.moveVelocity(600);
-	// pros::delay(405);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-	// wall.set_value(1);	
-	// intake.move_velocity(-600);
-
-	// pros::delay(37000);
-	// leftDriveMotors.moveVelocity(-600);
-	// rightDriveMotors.moveVelocity(-600);
-	// pros::delay(250);
-	// leftDriveMotors.moveVelocity(600);
-	// rightDriveMotors.moveVelocity(600);
-	// pros::delay(750);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-	// pros::delay(500);
-	// leftDriveMotors.moveVelocity(-600);
-	// rightDriveMotors.moveVelocity(-600);
-	// pros::delay(250);
-	// leftDriveMotors.brake();
-	// rightDriveMotors.brake();
-
+	if(skills)
+	{
+		return;
+	}
+	else
+	{
+		drive.setMaxDriveAccel(1);
+		drive.driveTiles(150);		
+		drive.driveTiles(-150);
+		drive.setMaxDriveAccel(0.12);
+		intake.move_velocity(-600);
+		drive.driveTiles(1500);
+		drive.turnDegreesAbsolute(315);
+		drive.driveTiles(400);
+		drive.turnDegreesAbsolute(45);
+		intake.move_velocity(200);
+		drive.setMaxDriveSpeed(0.5);
+		drive.driveTiles(250);
+		drive.driveTiles(-500);
+		drive.setMaxDriveSpeed(1);
+		drive.driveTiles(-900);
+		drive.turnDegreesAbsolute(0);
+		drive.driveTiles(400);
+		intake.move_velocity(-600);
+		wall.set_value(1);
+		for(int i = 0; i < 12; i++)
+		{
+			drive.driveTiles(-150);
+			drive.driveTiles(150);
+		}
+		intake.brake();
+		drive.driveTiles(-150);
+		drive.turnDegreesAbsolute(135);
+		drive.driveTiles(1000);
+		drive.killPIDs();
+	}
+	drive.killPIDs();
 
 }
 

@@ -146,35 +146,21 @@ void autonomous()
 		// 	pros::delay(650);
 		// }
 
-		//without wall bump
-		drive.turnDegreesAbsolute(310);
-		drive.driveTiles(700);
-		drive.turnDegreesAbsolute(335);
-		drive.driveTiles(3150);
-		drive.turnDegreesAbsolute(67);
-
-		//with wall bump
-		// drive.driveTiles(500);
-		// drive.turnDegreesAbsolute(250);
-		// drive.driveTiles(750, 750);
-		// drive.driveTiles(-150);
-		// drive.turnDegreesAbsolute(338);
-		// //pros::delay(3000);
-		// drive.driveTiles(3250);
-		// //pros::delay(3000);
-		// drive.turnDegreesAbsolute(67);
-		// //pros::delay(3000);
+		 drive.driveTiles(500);
+		 drive.turnDegreesAbsolute(247);
+		 drive.driveTiles(375);
+		 drive.turnDegreesAbsolute(335);
+		 //pros::delay(3000);
+		 drive.driveTiles(3250);
+		 //pros::delay(3000);
+		 drive.turnDegreesAbsolute(67);
+		 //pros::delay(3000);
 
 
 		// *******************PHASE 2*******************
-		drive.driveTiles(900);
-		//pros::delay(3000);
-		drive.driveTiles(-25);
-		//pros::delay(3000);
+		drive.driveTiles(850);
 		drive.turnDegreesAbsolute(127);
-		//pros::delay(3000);
-		drive.driveTiles(400); //prev 300
-		//pros::delay(3000);
+		drive.driveTiles(200); //prev 300
 		wingL.set_value(1);
 		wingR.set_value(1);
 
@@ -189,12 +175,15 @@ void autonomous()
 		drive.setActive(true);
 
 		//pros::delay(750);
-	 	drive.driveTiles(200);	
-		pros::delay(3000);	
+	 	drive.driveTiles(300); // 300	
+		pros::delay(3000);
+		//drive.turnDegreesAbsolute(3);	
 
 		drive.setMaxDriveAccel(1);
 
-		drive.driveTiles(1200, 2000); //1000, 2000
+		drive.driveTiles(600, 2000); //600
+		drive.turnDegreesAbsolute(355);
+		drive.driveTiles(600, 1000);
 		wingL.set_value(0);
 		wingR.set_value(0);
 		drive.driveTiles(-2000);
