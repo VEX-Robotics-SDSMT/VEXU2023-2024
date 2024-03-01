@@ -13,13 +13,22 @@ void catLaunch(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch
     cataMotors.brake();
 }
 
-void catLoop(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch, bool cataTarget)
+void catLoop(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch, bool cataTarget, bool &switchToggeled)
 {
     cataMotors.setBrakeMode(pros::E_MOTOR_BRAKE_HOLD);
-    if(limitSwitch.get_value() != cataTarget)
-        cataMotors.moveVelocity(-70);
+
+    if(limitSwitch.get_value() != cataTarget) //when primed on second press reaches slipgear.
+    {
+        cataMotors.moveVelocity(-50);
+        switchToggeled = true;
+    }
     else
+    {
+        if( switchToggeled == true )
+            pros::delay(3);
         cataMotors.brake();
+        switchToggeled = false;
+    }
 }
 
 

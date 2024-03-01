@@ -106,6 +106,7 @@ void autonomous()
 
 void opcontrol()
 {	
+	bool switchToggeled = false;
 	bool cataTarget = 0; // 0 = unprimed, 1 = primed
 	while(true)
 	{	
@@ -153,7 +154,7 @@ void opcontrol()
 		}
 		else
 		{
-			catLoop(cataMotors, limitSwitch, cataTarget);
+			catLoop(cataMotors, limitSwitch, cataTarget, switchToggeled);
 		}
 
 		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_DOWN)) {

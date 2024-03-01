@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "MINES224",
+    "project_name": "hunt test",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -308,8 +308,8 @@
     },
     "upload_options": {
       "icon": "clawbot",
-      "slot": 1,
-      "description": "MINES224"
+      "slot": 2,
+      "description": "hunt test"
     }
   }
 }
