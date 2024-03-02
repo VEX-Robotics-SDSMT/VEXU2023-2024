@@ -77,25 +77,19 @@ void autonomous()
 {
 	//********************MINES2 15in SKILLS********************************
 	if(skills) {
-		//back up slowly to keep bot in shooting position
-		leftDriveMotors.move(-20);
-		rightDriveMotors.move(-20);
-		for(int i = 0; i < 22; i++) {
-			catPrime(cataMotors, limitSwitch, -80);
-			pros::delay(1500);  //time at bottom before launching
-			cataMotors.move(127);
-			pros::delay(200);
-			cataMotors.brake();
-			pros::delay(500);  //time before next drop down
-		}
-		leftDriveMotors.brake();
-		rightDriveMotors.brake();
-
 		
 	}
 	//************MINES2 15in AUTO******************************************
 	else {
-
+		rightDriveMotors.move(127);
+		leftDriveMotors.move(127);
+		pros::delay(1500);
+		rightDriveMotors.move(-127);
+		leftDriveMotors.move(-127);
+		pros::delay(500);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		
 	}
  	
 
@@ -118,7 +112,6 @@ void autonomous()
 
 void opcontrol()
 {	
-	bool cataTarget = 0; // 0 = unprimed, 1 = primed
 	while(true)
 	{	
 		// ********************DRIVE********************
@@ -145,26 +138,5 @@ void opcontrol()
 
 		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
-		//CATAPULT
-		if(MasterController.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_R2))
-		{
-			if(cataTarget == 0)
-			{
-				cataTarget = 1;
-			}				
-			else
-			{
-				cataTarget = 0;
-			}				
-		}
-		else if (MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_R1))
-		{
-			cataMotors.moveVelocity(127);
-			cataTarget = 0;
-		}
-		else
-		{
-			catLoop(cataMotors, limitSwitch, cataTarget);
-		}
 	}
 }
