@@ -9,13 +9,16 @@ pros::ADIEncoder driveEncoderL(ENCODERL_TOP, ENCODERL_BOT, true);
 
 pros::GPS gps(VEX_GPS);
 
-pros::Motor left1(FRONTLEFT, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor left2(MIDLEFT, pros::E_MOTOR_GEARSET_06, false); //
-pros::Motor left3(BACKLEFT, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor right1(FRONTRIGHT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor right2(MIDRIGHT, pros::E_MOTOR_GEARSET_06, true);
-pros::Motor right3(BACKRIGHT, pros::E_MOTOR_GEARSET_06, false);
-pros::Motor intake(INTAKE, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor left1(FRONTLEFT, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor left2(MIDLEFT, pros::E_MOTOR_GEARSET_18, false); //
+pros::Motor left3(BACKLEFT, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor right1(FRONTRIGHT, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor right2(MIDRIGHT, pros::E_MOTOR_GEARSET_18, true);
+pros::Motor right3(BACKRIGHT, pros::E_MOTOR_GEARSET_18, false);
+pros::Motor intake(INTAKE, pros::E_MOTOR_GEARSET_36, true);
+pros::Motor ratchetF(RATCHET_FRONT, pros::E_MOTOR_GEARSET_36, false);
+pros::Motor ratchetB(RATCHET_BACK, pros::E_MOTOR_GEARSET_36, false);
+
 
 
 std::vector<pros::Motor> leftDriveVector = {left1, left2, left3};
@@ -24,6 +27,7 @@ Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 
 pros::ADIDigitalOut wall(WALLS);
+pros::ADIDigitalOut ratchet(RATCHET);
 
 
 double axisPercentBlue = 600.0 / 127;

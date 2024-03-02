@@ -6,10 +6,17 @@
 
 #define INERTIAL_SENSOR 9 //not in yet
 #define VEX_GPS 13
+
 #define ENCODERR_TOP 8
 #define ENCODERR_BOT 7
 #define ENCODERL_TOP 6
 #define ENCODERL_BOT 5
+#define RATCHET 2
+
+#define BRAKES 3 
+#define CLAW 4
+#define WALLS 1
+
 
 #define BACKRIGHT 21
 #define MIDRIGHT 10
@@ -18,7 +25,8 @@
 #define MIDLEFT 5
 #define FRONTLEFT 7
 #define INTAKE 11
-#define WALLS 1
+#define RATCHET_FRONT 13
+#define RATCHET_BACK 20
 
 #define CATAPULT_MOTOR_GEARSET redGearbox
 #define DRIVE_MOTOR_GEARSET blueGearbox
@@ -38,8 +46,11 @@ extern pros::Motor right1;
 extern pros::Motor right2;
 extern pros::Motor right3;
 extern pros::Motor intake;
+extern pros::Motor ratchetF;
+extern pros::Motor ratchetB;
 
 extern pros::ADIDigitalOut wall;
+extern pros::ADIDigitalOut ratchet;
 extern pros::ADIDigitalIn limitSwitch;
 
 extern std::vector<pros::Motor> leftDriveVector;

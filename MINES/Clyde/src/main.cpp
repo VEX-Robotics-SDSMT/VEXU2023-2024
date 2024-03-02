@@ -89,18 +89,18 @@ void autonomous()
 	if(!skills)
 	{
 		//**************SHOOT 10***********************
-		//pros::delay(15000); //change for pinky
-		//catPrime(cataMotors, limitSwitch, -100);
-		//pros::delay(500);
-	   	//catLaunch(cataMotors, limitSwitch, -127);
-		//pros::delay(600);
-	    //for(int i = 0; i < 9; i++)
-	    //{
-	   	//	catPrime(cataMotors, limitSwitch, -100);
-	   	//	pros::delay(335);
-	   	//	catLaunch(cataMotors, limitSwitch, -127);
-	  	//	pros::delay(600);
-		//}
+		pros::delay(15000); //change for pinky
+		catPrime(cataMotors, limitSwitch, -100);
+		pros::delay(500);
+	   	catLaunch(cataMotors, limitSwitch, -127);
+		pros::delay(600);
+	    for(int i = 0; i < 9; i++)
+	    {
+	   		catPrime(cataMotors, limitSwitch, -100);
+	   		pros::delay(335);
+	   		catLaunch(cataMotors, limitSwitch, -127);
+	  		pros::delay(600);
+		}
 
 		//*************POP TRIBALL*********************
 		drive.driveTiles(150);
@@ -108,23 +108,25 @@ void autonomous()
 		drive.turnDegreesAbsolute(260);
 		//pros::delay(1000);
 		wingL.set_value(1);
-		drive.setMaxDriveSpeed(0.5);
+		drive.setMaxDriveSpeed(0.72);
 		//pros::delay(1000);
-		drive.driveTiles(500);
+		drive.driveTiles(550);
 		drive.setMaxDriveSpeed(1);
 		//pros::delay(500);
 		wingL.set_value(0);
+		
 
 		//**************PUSH UNDER*********************
 		drive.turnDegreesAbsolute(295);
-		drive.driveTiles(450, 1000);
+		drive.driveTiles(445, 1000);
+		
 		drive.driveTiles(-600);
 
 		//**************GO TOUCH BAR******************
 		drive.turnDegreesAbsolute(240);
-		drive.driveTiles(-1300);
+		drive.driveTiles(-1175);
 		drive.turnDegreesAbsolute(210);
-		drive.driveTiles(-1100);
+		drive.driveTiles(-1350);
 		drive.killPIDs();
 	}
 	else

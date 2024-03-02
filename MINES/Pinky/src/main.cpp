@@ -4,6 +4,7 @@
 #include "globals.h"
 #include "pros/motors.h"
 #include "pros/rtos.h"
+#include "pros/rtos.hpp"
 
 //globals
 
@@ -79,9 +80,9 @@ void autonomous()
 	EncoderWheelSensorInterface encoderInterface(driveEncoderL, driveEncoderR);
 	//SensorInterface driveInterface(leftDriveMotors, rightDriveMotors);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(2.75, 0, 0);//0.85
+	drive.setDrivePIDVals(0.8, 0, 0);//0.85
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(4.45, 0, 0);//3.5
+	drive.setTurnPIDVals(1.70, 0, 0);//3.5
 	drive.setTurnPIDTol(1.25);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
@@ -94,6 +95,11 @@ void autonomous()
 	}
 	else
 	{
+		//drive.driveTiles(-500);
+		//drive.driveTiles(500);
+		//drive.turnDegreesAbsolute(180);
+		//drive.turnDegreesAbsolute(0);
+		
 		drive.setMaxDriveAccel(1);
 		drive.driveTiles(150);		
 		drive.driveTiles(-150);
@@ -105,7 +111,8 @@ void autonomous()
 		drive.turnDegreesAbsolute(45);
 		intake.move_velocity(200);
 		drive.setMaxDriveSpeed(0.5);
-		drive.driveTiles(250);
+		drive.driveTiles(300);
+		pros::delay(1000);
 		drive.driveTiles(-500);
 		drive.setMaxDriveSpeed(1);
 		drive.driveTiles(-900);
@@ -120,12 +127,11 @@ void autonomous()
 		}
 		intake.brake();
 		drive.driveTiles(-150);
-		drive.turnDegreesAbsolute(135);
-		drive.driveTiles(1000);
+		drive.turnDegreesAbsolute(120);
+		drive.driveTiles(600);
 		drive.killPIDs();
 	}
 	drive.killPIDs();
-
 }
 
 /**

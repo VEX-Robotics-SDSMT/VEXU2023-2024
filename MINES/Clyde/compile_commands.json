@@ -31,11 +31,11 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/main.cpp.o",
-            "src\\main.cpp"
+            "bin/globals.cpp.o",
+            "src\\globals.cpp"
         ],
         "directory": "C:\\Users\\101077691\\Source\\Repos\\VEXU2023-2024\\MINES\\Clyde",
-        "file": "src\\main.cpp"
+        "file": "src\\globals.cpp"
     },
     {
         "arguments": [
@@ -69,10 +69,10 @@
             "-funwind-tables",
             "--std=gnu++17",
             "-o",
-            "bin/globals.cpp.o",
-            "src\\globals.cpp"
+            "bin/main.cpp.o",
+            "src\\main.cpp"
         ],
         "directory": "C:\\Users\\101077691\\Source\\Repos\\VEXU2023-2024\\MINES\\Clyde",
-        "file": "src\\globals.cpp"
+        "file": "src\\main.cpp"
     }
 ]
