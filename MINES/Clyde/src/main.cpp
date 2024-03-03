@@ -110,7 +110,7 @@ void autonomous()
 		wingL.set_value(1);
 		drive.setMaxDriveSpeed(0.72);
 		//pros::delay(1000);
-		drive.driveTiles(550);
+		drive.driveTiles(550, 2000);
 		drive.setMaxDriveSpeed(1);
 		//pros::delay(500);
 		wingL.set_value(0);
@@ -118,7 +118,7 @@ void autonomous()
 
 		//**************PUSH UNDER*********************
 		drive.turnDegreesAbsolute(295);
-		drive.driveTiles(445, 1000);
+		drive.driveTiles(425, 1000);
 		
 		drive.driveTiles(-600);
 
@@ -133,21 +133,21 @@ void autonomous()
 	{
 		// *******************PHASE 1*******************
 
-		//catPrime(cataMotors, limitSwitch, -100);
-		//pros::delay(500);
-		//catLaunch(cataMotors, limitSwitch, -127);
-		//pros::delay(600);
-		//for(int i = 0; i < 21; i++)
-		//{
-		//	catPrime(cataMotors, limitSwitch, -100);
-		//	pros::delay(335);
-		//	catLaunch(cataMotors, limitSwitch, -127);
-		//	pros::delay(600);
-		//}
+		catPrime(cataMotors, limitSwitch, -100);
+		pros::delay(500);
+		catLaunch(cataMotors, limitSwitch, -127);
+		pros::delay(600);
+		for(int i = 0; i < 21; i++)
+		{
+			catPrime(cataMotors, limitSwitch, -100);
+			pros::delay(335);
+			catLaunch(cataMotors, limitSwitch, -127);
+			pros::delay(600);
+		}
 		drive.driveTiles(500);
 		drive.turnDegreesAbsolute(110);
-		drive.driveTiles(425);
-		drive.turnDegreesAbsolute(23);
+		drive.driveTiles(450);
+		drive.turnDegreesAbsolute(27);
 		drive.driveTiles(3100);
 		drive.turnDegreesAbsolute(292);
 
@@ -194,7 +194,7 @@ void autonomous()
 		
 		drive.killPIDs();
 	}
-	
+	drive.killPIDs();
 }
 
 /**

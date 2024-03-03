@@ -138,18 +138,18 @@ void autonomous()
 	else
 	{
 		//*******************PHASE 1*******************
-		// for(int i = 0; i < 22; i++)
-		// {
-		// 	catPrime(cataMotors, limitSwitch, -100);
-		// 	pros::delay(300);
-		// 	catLaunch(cataMotors, limitSwitch, -127);
-		// 	pros::delay(650);
-		// }
+		 for(int i = 0; i < 22; i++)
+		 {
+		 	catPrime(cataMotors, limitSwitch, -100);
+		 	pros::delay(300);
+		 	catLaunch(cataMotors, limitSwitch, -127);
+		 	pros::delay(650);
+		 }
 
 		 drive.driveTiles(500);
 		 drive.turnDegreesAbsolute(247);
-		 drive.driveTiles(375);
-		 drive.turnDegreesAbsolute(335);
+		 drive.driveTiles(400);
+		 drive.turnDegreesAbsolute(333);
 		 //pros::delay(3000);
 		 drive.driveTiles(3250);
 		 //pros::delay(3000);
@@ -160,7 +160,7 @@ void autonomous()
 		// *******************PHASE 2*******************
 		drive.driveTiles(850);
 		drive.turnDegreesAbsolute(127);
-		drive.driveTiles(200); //prev 300
+		drive.driveTiles(250); //prev 300
 		wingL.set_value(1);
 		wingR.set_value(1);
 

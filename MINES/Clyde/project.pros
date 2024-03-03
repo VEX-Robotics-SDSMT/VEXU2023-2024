@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Clyde",
+    "project_name": "MATCH",
     "target": "v5",
     "templates": {
       "kernel": {
@@ -309,7 +309,7 @@
     "upload_options": {
       "icon": "clawbot",
       "slot": 2,
-      "description": "Clyde"
+      "description": "SKILLS"
     }
   }
 }

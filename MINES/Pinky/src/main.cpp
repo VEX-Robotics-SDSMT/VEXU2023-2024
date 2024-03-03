@@ -2,6 +2,7 @@
 #include "DiffDrive.h"
 #include "botFunctions.h"
 #include "globals.h"
+#include "pros/misc.h"
 #include "pros/motors.h"
 #include "pros/rtos.h"
 #include "pros/rtos.hpp"
@@ -184,6 +185,9 @@ void opcontrol()
 			intake.move(-100000);
 		else
 			intake.brake();
+
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+			ratchet.set_value(1);
 
 
 		//*******************WALL**********************
