@@ -33,4 +33,4 @@ int blueGearbox = 600;
 int greenGearbox = 200;
 int redGearbox = 100;
 
-bool skills = true;
+bool skills = false; //if true runs skills else auton

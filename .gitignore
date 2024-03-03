@@ -1,5 +1,5 @@
 
 *.json
-GRUBB/MINES2/compile_commands.json
 *.o
-*.json
+*.bin
+*.elf
