@@ -25,7 +25,7 @@ void catLoop(Mines::MinesMotorGroup cataMotors, pros::ADIDigitalIn limitSwitch, 
     else
     {
         if( switchToggeled == true )
-            pros::delay(3);
+            pros::delay(4);
         cataMotors.brake();
         switchToggeled = false;
     }

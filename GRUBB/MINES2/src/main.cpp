@@ -77,7 +77,10 @@ void autonomous()
 {
 	if(skills)
 	{
+		wings.set_value(1);
+		pros::delay(1000);
 		rightDriveMotors.move(20);
+		wings.set_value(0);
 		leftDriveMotors.move(20);
 		for(int i = 0; i < 10; i++) {
 			catPrime(cataMotors, limitSwitch, -70);
@@ -92,11 +95,14 @@ void autonomous()
 	}
 	else
 	{
+		wings.set_value(1);
+		pros::delay(1000);
 		rightDriveMotors.move(20);
+		wings.set_value(0);
 		leftDriveMotors.move(20);
 		for(int i = 0; i < 22; i++) {
 			catPrime(cataMotors, limitSwitch, -70);
-			pros::delay(1200);	//time at bottom
+			pros::delay(3000);	//time at bottom
 			cataMotors.move(127);
 			pros::delay(300);
 			cataMotors.brake();

@@ -81,15 +81,88 @@ void autonomous()
 	}
 	//************MINES2 15in AUTO******************************************
 	else {
-		rightDriveMotors.move(127);
-		leftDriveMotors.move(127);
-		pros::delay(1500);
-		rightDriveMotors.move(-127);
-		leftDriveMotors.move(-127);
-		pros::delay(500);
+		rightDriveMotors.move(80);
+		leftDriveMotors.move(80);
+		pros::delay(375);
 		rightDriveMotors.brake();
 		leftDriveMotors.brake();
-		
+		pros::delay(500);
+		rightDriveMotors.move(-80);
+		leftDriveMotors.move(-80);
+		pros::delay(357);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1500);
+		rightDriveMotors.move(80); //turn left 90 deg
+		leftDriveMotors.move(-80);
+		pros::delay(160);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1000);
+		rightDriveMotors.move(-80); //hit wall
+		leftDriveMotors.move(-80);
+		pros::delay(300);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(100);
+		rightDriveMotors.move(80);
+		leftDriveMotors.move(80);
+		pros::delay(340);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1500);
+
+		rightDriveMotors.move(-80); //turn right 90 deg
+		leftDriveMotors.move(80);
+		pros::delay(160);
+		rightDriveMotors.brake(); 
+		leftDriveMotors.brake();
+		pros::delay(1200);
+		rightDriveMotors.move(127); //first ball
+		leftDriveMotors.move(127);
+		pros::delay(700);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1200);
+		rightDriveMotors.move(-80); //backs up
+		leftDriveMotors.move(-80);
+		pros::delay(300);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(600);
+
+		rightDriveMotors.move(80); //turn left 90 deg
+		leftDriveMotors.move(-80);
+		pros::delay(165);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1000);
+		rightDriveMotors.move(80); //drive to next ball
+		leftDriveMotors.move(80);
+		pros::delay(200);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1500);
+
+		rightDriveMotors.move(-80); //turn right 90 deg
+		leftDriveMotors.move(80);
+		pros::delay(165);
+		rightDriveMotors.brake(); //second ball
+		leftDriveMotors.brake();
+		pros::delay(1200);
+		rightDriveMotors.move(127);
+		leftDriveMotors.move(127);
+		pros::delay(700);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(1200);
+		rightDriveMotors.move(-80); //backs up
+		leftDriveMotors.move(-80);
+		pros::delay(300);
+		rightDriveMotors.brake();
+		leftDriveMotors.brake();
+		pros::delay(600);
+
 	}
  	
 
@@ -116,10 +189,10 @@ void opcontrol()
 	{	
 		// ********************DRIVE********************
 		// 2 stick arcade
-		// double leftAxisY = MasterController.get_analog(axisLeftY);
-		// double rightAxisX = MasterController.get_analog(axisRightX);
-		// double leftVelocity = ((leftAxisY + rightAxisX));
-		// double rightVelocity = ((leftAxisY - rightAxisX));
+		double leftAxisY = MasterController.get_analog(axisLeftY);
+		double rightAxisX = MasterController.get_analog(axisRightX);
+		double leftVelocity = ((leftAxisY + rightAxisX));
+		double rightVelocity = ((leftAxisY - rightAxisX));
 
 		// 1 stick arcade
 		//double leftAxisY = MasterController.get_analog(axisLeftY);
@@ -131,10 +204,10 @@ void opcontrol()
 		//double rightVelocity = ((leftAxisY - leftAxisX + aimVelocityRight));
 
 		// Tank
-		double leftAxisY = MasterController.get_analog(axisLeftY);
-	    double rightAxisY = MasterController.get_analog(axisRightY);
-		double leftVelocity = ((leftAxisY) * axisPercentBlue);
-		double rightVelocity = ((rightAxisY) * axisPercentBlue);
+		// double leftAxisY = MasterController.get_analog(axisLeftY);
+	    // double rightAxisY = MasterController.get_analog(axisRightY);
+		// double leftVelocity = ((leftAxisY) * axisPercentBlue);
+		// double rightVelocity = ((rightAxisY) * axisPercentBlue);
 
 		driveLoop(leftDriveMotors, rightDriveMotors, leftVelocity, rightVelocity);
 
