@@ -177,7 +177,6 @@ void autonomous()
 		//pros::delay(750);
 	 	drive.driveTiles(300); // 300	
 		pros::delay(3000);
-		//drive.turnDegreesAbsolute(3);	
 
 		drive.setMaxDriveAccel(1);
 
