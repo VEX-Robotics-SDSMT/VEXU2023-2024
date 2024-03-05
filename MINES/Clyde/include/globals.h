@@ -61,6 +61,7 @@ extern int greenGearbox;
 extern int redGearbox;
 
 extern bool skills;
+extern bool auto2;
 
 #define buttonUp pros::E_CONTROLLER_DIGITAL_UP
 #define buttonDown pros::E_CONTROLLER_DIGITAL_DOWN

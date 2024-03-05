@@ -86,7 +86,7 @@ void autonomous()
 	drive.setMaxTurnSpeed(1);
 
 	drive.setMaxDriveAccel(0.12);
-	if(!skills)
+	if(!skills && !auto2)
 	{
 		//**************SHOOT 10***********************
 		pros::delay(15000); //change for pinky
@@ -128,6 +128,47 @@ void autonomous()
 		drive.turnDegreesAbsolute(210);
 		drive.driveTiles(-1350);
 		drive.killPIDs();
+	}
+	else if(auto2)
+	{
+		// **************POP FROM CORNER STRAT**********
+		//***************POP ALLIANCE BALL**************
+		wingL.set_value(1);
+		drive.driveTiles(500, 1000);
+		wingL.set_value(0);
+		pros::delay(500);
+		//***************RAM ALLIANCE BALL**************
+		drive.turnDegreesAbsolute(30);
+		drive.driveTiles(500, 700);
+		drive.driveTiles(-500);
+		//*TURN AROUND TO START POPPING FROM OTHER SIDE*
+		drive.turnDegreesAbsolute(170);
+		wingR.set_value(1);
+		drive.driveTiles(600);
+		drive.setMaxDriveAccel(0.4);
+		for(int i = 0; i < 5; i++)	//set to 10 later
+		{
+			pros::delay(200);
+			drive.driveTiles(-500);
+			drive.driveTiles(500);
+		}
+		//wingR.set_value(0);
+		drive.setMaxDriveAccel(0.15);
+		//*******PUSH FORWARD TOWARD GOAL***************
+		wingR.set_value(0);
+		drive.turnDegreesAbsolute(140);
+		drive.driveTiles(1000, 800);
+		//wingR.set_value(1);
+		drive.turnDegreesAbsolute(130);
+		drive.driveTiles(2000);
+		//********REPOSITION****************************
+		wingR.set_value(0);
+		drive.turnDegreesAbsolute(100);
+		drive.setMaxDriveSpeed(0.4);
+		drive.driveTiles(600);
+		wingL.set_value(1);
+		drive.turnDegreesAbsolute(80);
+
 	}
 	else
 	{
