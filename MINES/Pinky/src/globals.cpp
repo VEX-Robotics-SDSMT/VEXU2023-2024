@@ -16,8 +16,6 @@ pros::Motor right1(FRONTRIGHT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor right2(MIDRIGHT, pros::E_MOTOR_GEARSET_18, true);
 pros::Motor right3(BACKRIGHT, pros::E_MOTOR_GEARSET_18, false);
 pros::Motor intake(INTAKE, pros::E_MOTOR_GEARSET_36, true);
-pros::Motor ratchetF(RATCHET_FRONT, pros::E_MOTOR_GEARSET_36, false);
-pros::Motor ratchetB(RATCHET_BACK, pros::E_MOTOR_GEARSET_36, false);
 
 
 
@@ -26,8 +24,10 @@ std::vector<pros::Motor> rightDriveVector = {right1, right2, right3};
 Mines::MinesMotorGroup leftDriveMotors(leftDriveVector);
 Mines::MinesMotorGroup rightDriveMotors(rightDriveVector);
 
-pros::ADIDigitalOut wall(WALLS);
-pros::ADIDigitalOut ratchet(RATCHET);
+pros::ADIDigitalOut wall(WALL);
+pros::ADIDigitalOut lowhang(LOWHANG);
+pros::ADIDigitalOut ramp(RAMP);
+pros::ADIDigitalOut lift(LIFT);
 
 
 double axisPercentBlue = 600.0 / 127;
@@ -37,4 +37,4 @@ int blueGearbox = 600;
 int greenGearbox = 200;
 int redGearbox = 100;
 
-bool skills = false;
+bool skills = 0;

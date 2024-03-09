@@ -40,4 +40,4 @@ int greenGearbox = 200;
 int redGearbox = 100;
 
 bool skills = false;
-bool auto2 = true;
+bool auto2 = false;

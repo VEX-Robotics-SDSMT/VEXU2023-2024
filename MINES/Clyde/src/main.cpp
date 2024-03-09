@@ -133,42 +133,112 @@ void autonomous()
 	{
 		// **************POP FROM CORNER STRAT**********
 		//***************POP ALLIANCE BALL**************
-		wingL.set_value(1);
-		drive.driveTiles(500, 1000);
-		wingL.set_value(0);
-		pros::delay(500);
-		//***************RAM ALLIANCE BALL**************
-		drive.turnDegreesAbsolute(30);
-		drive.driveTiles(500, 700);
-		drive.driveTiles(-500);
-		//*TURN AROUND TO START POPPING FROM OTHER SIDE*
-		drive.turnDegreesAbsolute(170);
-		wingR.set_value(1);
-		drive.driveTiles(600);
-		drive.setMaxDriveAccel(0.4);
-		for(int i = 0; i < 5; i++)	//set to 10 later
-		{
-			pros::delay(200);
-			drive.driveTiles(-500);
-			drive.driveTiles(500);
-		}
-		//wingR.set_value(0);
-		drive.setMaxDriveAccel(0.15);
-		//*******PUSH FORWARD TOWARD GOAL***************
-		wingR.set_value(0);
-		drive.turnDegreesAbsolute(140);
-		drive.driveTiles(1000, 800);
+		//wingL.set_value(1);
+		//drive.driveTiles(500, 1000);
+		//wingL.set_value(0);
+		//pros::delay(500);
+		////***************RAM ALLIANCE BALL**************
+		//drive.turnDegreesAbsolute(30);
+		//drive.driveTiles(500, 700);
+		//drive.driveTiles(-500);
+		////*TURN AROUND TO START POPPING FROM OTHER SIDE*
+		//drive.turnDegreesAbsolute(170);
 		//wingR.set_value(1);
-		drive.turnDegreesAbsolute(130);
-		drive.driveTiles(2000);
-		//********REPOSITION****************************
-		wingR.set_value(0);
-		drive.turnDegreesAbsolute(100);
-		drive.setMaxDriveSpeed(0.4);
-		drive.driveTiles(600);
-		wingL.set_value(1);
-		drive.turnDegreesAbsolute(80);
+		//drive.driveTiles(600);
+		//drive.setMaxDriveAccel(0.4);
+		//for(int i = 0; i < 5; i++)	//set to 10 later
+		//{
+		//	pros::delay(200);
+		//	drive.driveTiles(-500);
+		//	drive.driveTiles(500);
+		//}
+		////wingR.set_value(0);
+		//drive.setMaxDriveAccel(0.15);
+		////*******PUSH FORWARD TOWARD GOAL***************
+		//wingR.set_value(0);
+		//drive.turnDegreesAbsolute(140);
+		//drive.driveTiles(1000, 800);
+		////wingR.set_value(1);
+		//drive.turnDegreesAbsolute(130);
+		//drive.driveTiles(2000);
+		////********REPOSITION****************************
+		//wingR.set_value(0);
+		//drive.turnDegreesAbsolute(100);
+		//drive.setMaxDriveSpeed(0.4);
+		//drive.driveTiles(600);
+		//wingL.set_value(1);
+		//drive.turnDegreesAbsolute(80);
 
+		// **********Wait for Pinky**********
+		pros::delay(6000);
+		// **********Drive forward off of start and open wing**********
+		drive.driveTiles(400);
+		wingR.set_value(1);
+		//pros::delay(3000);
+		drive.driveTiles(250);
+		//pros::delay(3000);
+		drive.setMaxDriveAccel(1);
+		drive.setMaxDriveSpeed(1);
+		// **********Pop 10 triballs**********
+		for(int i = 0; i < 9; i++)
+		{
+			//pros::delay(200);
+			drive.driveTiles(300);
+			drive.driveTiles(-300);
+		}
+		drive.driveTiles(350);
+		//wingR.set_value(0);		
+		//drive.setMaxDriveAccel(.5);
+		//drive.setMaxDriveSpeed(.5);
+		//drive.driveTiles(350, 2000);
+		//drive.turnDegreesAbsolute(315);
+		////pros::delay(3000);
+		//drive.driveTiles(500, 2000);
+		//drive.driveTiles(-500);
+		//drive.turnDegreesAbsolute(0);
+		//drive.driveTiles(-600);
+		//wingR.set_value(1);
+		//pros::delay(200);
+		//for(int i = 0; i < 4; i++)
+		//{
+		//	//pros::delay(200);
+		//	drive.driveTiles(300);
+		//	drive.driveTiles(-300);
+		//}
+		//// **********Bowl triballs accross field**********
+		//drive.driveTiles(350);
+		wingR.set_value(0);		
+		drive.setMaxDriveAccel(.5);
+		drive.setMaxDriveSpeed(.5);
+		drive.driveTiles(300, 2000);
+		drive.turnDegreesAbsolute(315);
+		//pros::delay(3000);
+		drive.driveTiles(3400, 4000);
+		//pros::delay(3000);
+		drive.turnDegreesAbsolute(270);
+		//pros::delay(3000);
+		drive.driveTiles(900);
+		//pros::delay(3000);
+		drive.turnDegreesAbsolute(225);
+		//pros::delay(3000);
+		drive.driveTiles(400);
+		drive.setMaxDriveAccel(1);
+		drive.setMaxDriveSpeed(1);
+		// **********Push triballs under goal**********
+		for(int i = 0; i < 2; i++)
+		{
+			drive.driveTiles(300, 1000);
+			drive.driveTiles(-300, 1000);
+			//pros::delay(3000);
+		}
+		// **********Go touch for winpoint**********
+		drive.turnDegreesAbsolute(270);
+		//pros::delay(3000);
+		drive.driveTiles(-1200);
+		//pros::delay(3000);
+		drive.turnDegreesAbsolute(315);
+		//pros::delay(3000);
+		drive.driveTiles(-1500);
 	}
 	else
 	{
@@ -191,15 +261,12 @@ void autonomous()
 		drive.turnDegreesAbsolute(27);
 		drive.driveTiles(3100);
 		drive.turnDegreesAbsolute(292);
-
-
 		// *******************PHASE 2*******************
 		drive.driveTiles(800);
 		drive.turnDegreesAbsolute(235);
 		drive.driveTiles(400);
 		wingL.set_value(1);
 		wingR.set_value(1);
-
 		// SWING TURN
 		drive.setActive(false);
 		leftDriveMotors.moveVelocity(330);

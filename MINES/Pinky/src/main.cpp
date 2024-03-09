@@ -81,18 +81,117 @@ void autonomous()
 	EncoderWheelSensorInterface encoderInterface(driveEncoderL, driveEncoderR);
 	//SensorInterface driveInterface(leftDriveMotors, rightDriveMotors);
 	DiffDrive drive(leftDriveMotors, rightDriveMotors, &encoderInterface, intertialSensor);
-	drive.setDrivePIDVals(0.8, 0, 0);//0.85
+	drive.setDrivePIDVals(0.55, 0, 0);//0.85
 	drive.setDrivePIDTol(50);
-	drive.setTurnPIDVals(1.70, 0, 0);//3.5
-	drive.setTurnPIDTol(1.25);
+	drive.setTurnPIDVals(1.75, 0, 0);//3.5
+	drive.setTurnPIDTol(1.5);
 	drive.setMaxDriveSpeed(1); 
 	drive.setMaxTurnSpeed(1);
 	drive.setMaxDriveAccel(0.12);
 	drive.setMaxTurnAccel(0.12);
 
+	//drive.driveTiles(300);
+	//drive.driveTiles(-300);
+	//drive.turnDegreesAbsolute(180);
+	//drive.turnDegreesAbsolute(0);
+	//pros::delay(10000);
+
 	if(skills)
 	{
-		return;
+		// Intake first ball
+		intake.set_brake_mode(pros::E_MOTOR_BRAKE_HOLD);
+		drive.setMaxDriveAccel(1);
+		drive.driveTiles(-150);
+		intake.move_velocity(200);		
+		drive.setMaxDriveAccel(0.12);
+		drive.setMaxDriveSpeed(0.5);
+		drive.driveTiles(150);		
+		pros::delay(500); //1000
+		// Go down alley
+		drive.driveTiles(-200);
+		drive.setMaxDriveSpeed(1);
+		drive.turnDegreesAbsolute(255);
+		drive.driveTiles(315);
+		drive.turnDegreesAbsolute(225);
+		intake.brake();
+		drive.setMaxDriveSpeed(0.6);
+		drive.driveTiles(1900);
+		//intake.move_velocity(-600);
+		//drive.driveTiles(100);
+		// Turn towards goal
+		drive.turnDegreesAbsolute(180);
+		drive.driveTiles(625);
+		drive.turnDegreesAbsolute(135);
+		// Push Under Goal
+		intake.move_velocity(-600);
+		drive.driveTiles(100);		
+		drive.setDriveVelocity(1);
+		drive.driveTiles(-200);
+		drive.driveTiles(400, 1000);
+		// Go towards 2nd ball
+		drive.setMaxDriveSpeed(1);
+		drive.driveTiles(-200);
+		drive.turnDegreesAbsolute(180);
+		drive.driveTiles(-250);
+		drive.turnDegreesAbsolute(270);
+		// Intake 2nd ball
+		intake.move_velocity(200);
+		drive.setMaxDriveSpeed(0.5);
+		drive.driveTiles(200);
+		pros::delay(500);
+		drive.setMaxDriveSpeed(1);
+		// Go towards goal
+		drive.driveTiles(-1500);
+		drive.turnDegreesAbsolute(225);
+		// Push 2nd ball under
+		intake.move_velocity(-600);
+		drive.driveTiles(600);		
+		drive.driveTiles(-300);
+		drive.driveTiles(400, 1000);
+		// Go to be wall
+		drive.driveTiles(-500);
+		drive.turnDegreesAbsolute(270);
+		drive.driveTiles(600);
+		drive.turnDegreesAbsolute(0);
+		pros::delay(3000);
+		// Go to bar for win point
+		drive.turnDegreesAbsolute(45);
+		drive.driveTiles(400);
+		drive.turnDegreesAbsolute(0);
+		drive.driveTiles(300);
+
+		//drive.setMaxDriveSpeed(1);
+		//drive.driveTiles(1150);
+		//drive.turnDegreesAbsolute(225);
+		//intake.move_velocity(-600);
+		//drive.driveTiles(-300);
+		//drive.driveTiles(500, 1000);
+		//pros::delay(2000);
+		//drive.driveTiles(-1000);
+		//pros::delay(2000);
+		//drive.turnDegreesAbsolute(270);
+		//pros::delay(2000);
+		//drive.driveTiles(900);
+		//pros::delay(2000);
+		//drive.setMaxDriveSpeed(0.5);
+		//intake.move_velocity(200);
+		//drive.driveTiles(150);
+		//pros::delay(2000); //1000
+		//drive.driveTiles(-1050);
+		//pros::delay(2000);
+		//drive.turnDegreesAbsolute(225);
+		//pros::delay(2000);
+		//drive.driveTiles(-100);
+		//drive.driveTiles(300);
+		//pros::delay(2000);
+		//drive.driveTiles(-1000);
+		//pros::delay(2000);
+		//drive.turnDegreesAbsolute(270);
+		//drive.driveTiles(1000);
+		//pros::delay(2000);
+		//drive.turnDegreesAbsolute(0);
+		//pros::delay(1000);
+
 	}
 	else
 	{
@@ -151,6 +250,8 @@ void autonomous()
 
 void opcontrol()
 {	
+	bool rampDown = 0;
+	bool lowHangDown = 0;
 	while(true)
 	{	
 		// ********************DRIVE********************
@@ -186,15 +287,37 @@ void opcontrol()
 		else
 			intake.brake();
 
-		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
-			ratchet.set_value(1);
-
-
 		//*******************WALL**********************
 		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_A))
 			wall.set_value(1);
 		else
 			wall.set_value(0);
+
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_UP))
+		{
+			lowhang.set_value(1);
+			lowHangDown = 1;
+		}
+			
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT))
+		{
+			if(lowHangDown)
+			{
+				ramp.set_value(1);
+				rampDown = 1;
+			}			
+		}			
+		if(MasterController.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN))
+		{
+			if(rampDown && lowHangDown)
+				lift.set_value(1);
+		}
 		
 	}
+	//UP = low hang
+	//RIGHT = lower ramp/stabilizer
+	//DOWN = lift
+	// A = Wall
+	// Ports A, B, C, D
+
 }
